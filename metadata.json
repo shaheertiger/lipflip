@@ -1,0 +1,5 @@
+{
+  "name": "LipFlipBeforeAfter",
+  "description": "Instant cosmetic visualization tool using Gemini to simulate lip flip procedures with an interactive before/after slider.",
+  "requestFramePermissions": []
+}
