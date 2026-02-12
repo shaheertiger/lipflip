@@ -28,8 +28,8 @@ const openDB = (): Promise<IDBDatabase> => {
       }
     };
 
-    request.onsuccess = () => resolve((event.target as IDBOpenDBRequest).result);
-    request.onerror = () => reject((event.target as IDBOpenDBRequest).error);
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
   });
 };
 

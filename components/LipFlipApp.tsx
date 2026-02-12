@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import { RotateCcw, AlertCircle, Camera, Wand2, Download, ArrowRight, Sparkles, Heart, Scan, Activity } from 'lucide-react';
+import { RotateCcw, AlertCircle, Camera, Wand2, Download, ArrowRight, Sparkles, Heart, Activity } from 'lucide-react';
 import { ImageUploader } from './ImageUploader';
 import { ComparisonSlider } from './ComparisonSlider';
 import { Logo } from './Logo';
@@ -168,11 +168,11 @@ const LipFlipApp: React.FC = () => {
       setStatus(ProcessingStatus.COMPLETE);
       setScanStep(null);
 
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
       setStatus(ProcessingStatus.ERROR);
       setScanStep(null);
-      setError(err.message || "Something went wrong during the transformation.");
+      setError(err instanceof Error ? err.message : "Something went wrong during the transformation.");
     }
   };
 
@@ -229,7 +229,7 @@ const LipFlipApp: React.FC = () => {
             </div>
             
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-serif text-white tracking-tight leading-[1.1] md:leading-[1.1]">
-              Don't guess with <br/>
+              Don&apos;t guess with <br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-rose-400 to-pink-500">
                 your face.
               </span>
@@ -296,10 +296,10 @@ const LipFlipApp: React.FC = () => {
               
               <div className="relative group w-full max-w-sm aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-white/10 mb-8 md:mb-10 bg-black/50">
                 
-                {/* Image */}
-                <img 
-                  src={originalImage.previewUrl} 
-                  alt="Original" 
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={originalImage.previewUrl}
+                  alt="Original"
                   className="w-full h-full object-cover opacity-90 transition-opacity duration-500"
                 />
                 
@@ -420,8 +420,8 @@ const LipFlipApp: React.FC = () => {
                     <div>
                       <h3 className="text-xl font-serif text-white mb-2">Aesthetic Analysis</h3>
                       <p className="text-slate-300 text-sm leading-relaxed font-light">
-                        Our AI has visualized a subtle relaxation of the orbicularis oris muscle (the 'lip flip' effect). 
-                        Notice how the upper vermilion border is gently rolled outward, creating a fuller appearance 
+                        Our AI has visualized a subtle relaxation of the orbicularis oris muscle (the &apos;lip flip&apos; effect).
+                        Notice how the upper vermilion border is gently rolled outward, creating a fuller appearance
                         without the projection associated with fillers. This mimics a natural, hydrated lift.
                       </p>
                     </div>
