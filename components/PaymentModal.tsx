@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { X, Lock, CreditCard, ShieldCheck, Zap, Clock, Sparkles } from 'lucide-react';
 
@@ -26,6 +28,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, onS
   const [messageIndex, setMessageIndex] = useState(0);
 
   // Reset state when modal opens
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (isOpen) {
       setIsDiscounted(false);
@@ -34,11 +37,12 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, onS
       setMessageIndex(0);
     }
   }, [isOpen]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   // Timer & Text Rotation logic
   useEffect(() => {
-    let timer: any;
-    let messageTimer: any;
+    let timer: ReturnType<typeof setInterval> | undefined;
+    let messageTimer: ReturnType<typeof setInterval> | undefined;
 
     if (isOpen && isDiscounted && timeLeft > 0) {
       // Countdown timer
@@ -231,7 +235,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, onS
             <div className="flex items-start gap-2">
                <input type="checkbox" defaultChecked className="mt-1 accent-pink-500 shrink-0" required />
                <p className="text-[10px] text-slate-500 leading-normal text-justify">
-                 <strong>Billing Terms:</strong> By clicking "Pay", you agree to a one-time charge of <strong>${currentPrice}</strong> for today's visualization. You also agree to a <strong>recurring weekly subscription of $3.99</strong> for unlimited access to the Aesthetic AI Engine, which will automatically begin 7 days from today. You can cancel anytime in your settings.
+                 <strong>Billing Terms:</strong> By clicking &ldquo;Pay&rdquo;, you agree to a one-time charge of <strong>${currentPrice}</strong> for today&apos;s visualization. You also agree to a <strong>recurring weekly subscription of $3.99</strong> for unlimited access to the Aesthetic AI Engine, which will automatically begin 7 days from today. You can cancel anytime in your settings.
                </p>
             </div>
             

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, ShieldCheck, Heart, CheckCircle2 } from 'lucide-react';
+import { Star, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 const reviews = [
   {
@@ -52,7 +52,7 @@ export const Testimonials: React.FC = () => {
           Clinically Calibrated Results
         </div>
         <h3 className="text-2xl md:text-3xl font-serif text-white text-center">
-          Don't just take our word for it.
+          Don&apos;t just take our word for it.
         </h3>
         <div className="flex items-center gap-1.5">
           <div className="flex">
@@ -89,7 +89,7 @@ export const Testimonials: React.FC = () => {
                 )}
               </div>
               
-              <p className="text-slate-300 text-sm leading-relaxed mb-6 font-light font-sans tracking-wide">"{review.text}"</p>
+              <p className="text-slate-300 text-sm leading-relaxed mb-6 font-light font-sans tracking-wide">&ldquo;{review.text}&rdquo;</p>
               
               <div className="flex items-center gap-3 mt-auto border-t border-white/5 pt-4">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-slate-800 to-slate-700 border border-white/10 flex items-center justify-center text-xs font-bold text-white shadow-inner">

@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { ChevronsLeftRight, ZoomIn, ZoomOut, RotateCcw, Move } from 'lucide-react';
 
@@ -25,8 +27,20 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [startPan, setStartPan] = useState({ x: 0, y: 0 }); // Mouse position at start of drag
   const [initialPan, setInitialPan] = useState({ x: 0, y: 0 }); // Pan value at start of drag
+  const [containerWidth, setContainerWidth] = useState<number | null>(null);
 
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const updateWidth = () => {
+      if (containerRef.current) {
+        setContainerWidth(containerRef.current.offsetWidth);
+      }
+    };
+    updateWidth();
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
+  }, []);
 
   // --- Helpers ---
 
@@ -87,7 +101,7 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
     if (isPanning) {
       const dx = clientX - startPan.x;
       const dy = clientY - startPan.y;
-      
+
       const newPanRaw = {
         x: initialPan.x + dx,
         y: initialPan.y + dy
@@ -95,6 +109,7 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
 
       setPan(constrainPan(newPanRaw, scale));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPanning, initialPan, startPan, scale]);
 
   // --- Global Mouse/Touch Listeners ---
@@ -202,6 +217,7 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
           
           {/* After Image (Background) */}
           <div className="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={afterImage}
               alt="After Lip Flip"
@@ -216,10 +232,11 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
             style={{ width: `${position}%` }}
           >
             {/* Inner container for before image to counteract clip width and apply transform */}
-            <div 
+            <div
                className="absolute top-0 left-0 h-full"
-               style={{ width: containerRef.current?.offsetWidth || '100%' }}
+               style={{ width: containerWidth ?? '100%' }}
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={beforeImage}
                 alt="Before Lip Flip"
