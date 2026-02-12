@@ -28,18 +28,24 @@ export async function POST(request: NextRequest) {
 
     const response = await ai.models.generateContent({
       model,
-      contents: {
-        parts: [
-          {
-            inlineData: {
-              mimeType,
-              data: base64Image,
+      contents: [
+        {
+          role: 'user',
+          parts: [
+            {
+              inlineData: {
+                mimeType,
+                data: base64Image,
+              },
             },
-          },
-          {
-            text: prompt,
-          },
-        ],
+            {
+              text: prompt,
+            },
+          ],
+        },
+      ],
+      config: {
+        responseModalities: ['IMAGE', 'TEXT'],
       },
     });
 
