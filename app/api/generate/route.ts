@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { GoogleGenAI } from '@google/genai';
 
+export const maxDuration = 60;
+
 const API_KEY = process.env.GEMINI_API_KEY;
 
 export async function POST(request: NextRequest) {
@@ -65,8 +67,14 @@ export async function POST(request: NextRequest) {
       { status: 502 }
     );
   } catch (error: unknown) {
-    const message =
-      error instanceof Error ? error.message : 'Failed to generate lip flip image.';
+    let message = 'Failed to generate lip flip image.';
+    if (error instanceof Error) {
+      message = error.message;
+    } else if (typeof error === 'object' && error !== null) {
+      message = JSON.stringify(error);
+    } else if (typeof error === 'string') {
+      message = error;
+    }
     console.error('Gemini API Error:', error);
     return NextResponse.json({ error: message }, { status: 500 });
   }
