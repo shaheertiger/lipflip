@@ -7,7 +7,7 @@ const BASE_URL = "https://lipflipbeforeandafter.online";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Lip Flip Before and After | AI Lip Flip Visualizer - See Your Results Instantly",
+  title: "Lip Flip Before and After | AI Lip Flip Visualizer",
   description:
     "See your lip flip before and after results instantly with our AI-powered lip flip visualizer. Upload a selfie and preview exactly what a lip flip looks like on your face. Private, instant, clinically calibrated lip flip simulation. No appointment needed.",
   keywords: [
