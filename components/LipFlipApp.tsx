@@ -191,7 +191,7 @@ const LipFlipApp: React.FC = () => {
       <ExitIntentPopup onScrollToUploader={scrollToUploader} />
 
       {/* CRO: Sticky Mobile Bottom CTA */}
-      <StickyMobileCTA onScrollToUploader={scrollToUploader} />
+      <StickyMobileCTA onScrollToUploader={scrollToUploader} hasUploadedImage={!!originalImage.previewUrl} />
 
       {/* Navbar - pushed down by announcement bar */}
       <nav className="fixed top-8 w-full z-50 border-b border-white/5 bg-black/50 backdrop-blur-xl transition-all duration-300">
