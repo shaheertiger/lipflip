@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import { ThankYouRedirect } from './ThankYouRedirect';
 
 export const metadata: Metadata = {
   title: 'Thank You for Your Purchase | Lip Flip Before and After Visualizer',
@@ -37,19 +37,10 @@ export default function ThankYou() {
         </h1>
 
         <p className="text-slate-400 text-base md:text-lg leading-relaxed">
-          Thank you for your purchase. Your AI-powered lip flip before and after
-          visualization is being generated now.
+          Thank you for your purchase. Redirecting you to your result...
         </p>
 
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-pink-600 to-rose-600 text-white rounded-full font-bold text-lg shadow-[0_0_40px_-10px_rgba(236,72,153,0.5)] hover:shadow-[0_0_60px_-10px_rgba(236,72,153,0.7)] transition-all hover:-translate-y-0.5"
-        >
-          View Your Result
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
-        </Link>
+        <ThankYouRedirect />
 
         <p className="text-xs text-slate-500">
           A receipt has been sent to your email by Stripe.

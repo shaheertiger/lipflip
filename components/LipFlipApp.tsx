@@ -106,7 +106,12 @@ const LipFlipApp: React.FC = () => {
 
   const handlePaymentSuccess = () => {
     setShowPayment(false);
-    executeGeneration();
+    executeGeneration().finally(() => {
+      // Restore URL from /thank-you back to / after generation completes
+      if (window.location.pathname === '/thank-you') {
+        window.history.replaceState({}, '', '/');
+      }
+    });
   };
 
   const handlePaymentClose = () => {
