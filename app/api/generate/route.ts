@@ -3,7 +3,7 @@ import { GoogleGenAI } from '@google/genai';
 
 export const maxDuration = 60;
 
-const API_KEY = process.env.GOOGLE_API_KEY;
+const API_KEY = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
 
 export async function POST(request: NextRequest) {
   if (!API_KEY) {
