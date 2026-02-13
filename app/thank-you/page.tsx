@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'Thank You for Your Purchase | Lip Flip Before and After Visualizer',
@@ -13,7 +14,11 @@ export const metadata: Metadata = {
 
 export default function ThankYou() {
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 relative">
+    <>
+      <Script id="gtag-thank-you-conversion" strategy="afterInteractive">
+        {`gtag('event', 'page_view', { 'send_to': 'AW-11410655364' });`}
+      </Script>
+      <div className="min-h-screen flex items-center justify-center px-4 relative">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-pink-600/20 rounded-full blur-[128px]" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[128px]" />
@@ -56,5 +61,6 @@ export default function ThankYou() {
         </p>
       </div>
     </div>
+    </>
   );
 }
