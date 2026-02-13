@@ -47,7 +47,8 @@ export const ExitIntentPopup: React.FC<{ onScrollToUploader: () => void }> = ({ 
     setDismissed(true);
   };
 
-  const handleCTA = () => {
+  const handleCTA = (e: React.MouseEvent) => {
+    e.stopPropagation();
     handleDismiss();
     onScrollToUploader();
   };
@@ -55,9 +56,9 @@ export const ExitIntentPopup: React.FC<{ onScrollToUploader: () => void }> = ({ 
   if (!visible || dismissed) return null;
 
   return (
-    <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={handleDismiss} />
-      <div className="relative w-full max-w-md bg-[#0F1115] border border-white/10 rounded-3xl shadow-2xl overflow-hidden animate-scale-in">
+    <div className="fixed inset-0 z-[70] flex items-center justify-center p-4" onClick={handleDismiss}>
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" aria-hidden="true" />
+      <div className="relative w-full max-w-md bg-[#0F1115] border border-white/10 rounded-3xl shadow-2xl overflow-hidden animate-scale-in" onClick={(e) => e.stopPropagation()}>
         {/* Top gradient */}
         <div className="h-1.5 bg-gradient-to-r from-pink-500 via-rose-500 to-purple-500" />
 
@@ -99,6 +100,7 @@ export const ExitIntentPopup: React.FC<{ onScrollToUploader: () => void }> = ({ 
           </div>
 
           <button
+            type="button"
             onClick={handleCTA}
             className="w-full py-4 bg-gradient-to-r from-pink-600 to-rose-600 rounded-full text-white font-bold text-lg shadow-[0_0_40px_-10px_rgba(236,72,153,0.5)] hover:shadow-[0_0_60px_-10px_rgba(236,72,153,0.7)] transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2"
           >
