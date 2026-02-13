@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" fill="none">
+  <defs>
+    <linearGradient id="heroBg" x1="0" y1="0" x2="1200" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1a0a1e"/>
+      <stop offset="50%" stop-color="#2d1035"/>
+      <stop offset="100%" stop-color="#1a0a1e"/>
+    </linearGradient>
+    <linearGradient id="pinkGlow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ec4899" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#be185d" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="lipGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f472b6"/>
+      <stop offset="50%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#be185d"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="500" fill="url(#heroBg)"/>
+  <!-- Decorative circles -->
+  <circle cx="200" cy="100" r="150" fill="url(#pinkGlow)" opacity="0.4"/>
+  <circle cx="1000" cy="400" r="200" fill="url(#pinkGlow)" opacity="0.3"/>
+  <circle cx="600" cy="250" r="120" fill="url(#pinkGlow)" opacity="0.2"/>
+  <!-- Central face outline -->
+  <g transform="translate(600, 220)" filter="url(#softGlow)">
+    <ellipse cx="0" cy="0" rx="100" ry="130" stroke="#f472b6" stroke-width="1.5" fill="none" opacity="0.3"/>
+    <!-- Eyes -->
+    <ellipse cx="-35" cy="-35" rx="18" ry="8" stroke="#f9a8d4" stroke-width="1.5" fill="none" opacity="0.5"/>
+    <ellipse cx="35" cy="-35" rx="18" ry="8" stroke="#f9a8d4" stroke-width="1.5" fill="none" opacity="0.5"/>
+    <!-- Nose -->
+    <path d="M-5 -5 Q0 15 5 -5" stroke="#f9a8d4" stroke-width="1.2" fill="none" opacity="0.4"/>
+    <!-- Upper lip - highlighted -->
+    <path d="M-35 30 Q-20 18 0 22 Q20 18 35 30" stroke="url(#lipGrad)" stroke-width="3" fill="none" filter="url(#glow)"/>
+    <!-- Cupid's bow detail -->
+    <path d="M-12 24 Q-6 18 0 22 Q6 18 12 24" stroke="#f472b6" stroke-width="2" fill="none" filter="url(#glow)"/>
+    <!-- Lower lip -->
+    <path d="M-35 30 Q-15 48 0 50 Q15 48 35 30" stroke="#f9a8d4" stroke-width="1.5" fill="none" opacity="0.5"/>
+    <!-- Arrow showing the flip -->
+    <g transform="translate(50, 20)" opacity="0.7">
+      <path d="M10 15 Q15 5 12 -5" stroke="#ec4899" stroke-width="1.5" fill="none"/>
+      <path d="M9 -2 L12 -5 L15 -1" stroke="#ec4899" stroke-width="1.5" fill="none"/>
+    </g>
+  </g>
+  <!-- Injection point dots -->
+  <g filter="url(#glow)" opacity="0.8">
+    <circle cx="573" cy="248" r="3" fill="#ec4899"/>
+    <circle cx="585" cy="243" r="3" fill="#ec4899"/>
+    <circle cx="615" cy="243" r="3" fill="#ec4899"/>
+    <circle cx="627" cy="248" r="3" fill="#ec4899"/>
+  </g>
+  <!-- Text elements -->
+  <text x="600" y="420" text-anchor="middle" font-family="serif" font-size="28" fill="white" font-weight="bold" opacity="0.9">The Lip Flip: Subtle Enhancement, Natural Results</text>
+  <text x="600" y="455" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#94a3b8" opacity="0.7">Neurotoxin relaxes the orbicularis oris muscle, allowing the upper lip to gently roll outward</text>
+  <!-- Decorative lines -->
+  <line x1="350" y1="395" x2="500" y2="395" stroke="#ec4899" stroke-width="0.5" opacity="0.3"/>
+  <line x1="700" y1="395" x2="850" y2="395" stroke="#ec4899" stroke-width="0.5" opacity="0.3"/>
+</svg>
