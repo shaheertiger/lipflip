@@ -196,7 +196,7 @@ const LipFlipApp: React.FC = () => {
       {/* Navbar - pushed down by announcement bar */}
       <nav className="fixed top-8 w-full z-50 border-b border-white/5 bg-black/50 backdrop-blur-xl transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between">
-          <div onClick={() => window.location.reload()} className="scale-90 md:scale-100 origin-left cursor-pointer">
+          <div onClick={() => { handleReset(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="scale-90 md:scale-100 origin-left cursor-pointer">
             <Logo />
           </div>
           <div className="flex items-center gap-4 md:gap-6">
