@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Shield } from 'lucide-react';
 
-export const StickyMobileCTA: React.FC<{ onScrollToUploader: () => void }> = ({ onScrollToUploader }) => {
+export const StickyMobileCTA: React.FC<{ onScrollToUploader: () => void; hasUploadedImage?: boolean }> = ({ onScrollToUploader, hasUploadedImage }) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export const StickyMobileCTA: React.FC<{ onScrollToUploader: () => void }> = ({ 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  if (!visible) return null;
+  if (!visible || hasUploadedImage) return null;
 
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#0a0a0f]/95 backdrop-blur-xl border-t border-white/10 p-3 animate-slide-up">
