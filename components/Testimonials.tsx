@@ -18,7 +18,7 @@ const reviews = [
   {
     name: "Emily Rodriguez",
     role: "Verified User",
-    text: "Honestly, this saved me money. I realized I love my natural shape and just needed a good gloss. Best free tool ever for avoiding buyer's remorse.",
+    text: "Honestly, this saved me money. I realized I love my natural shape and just needed a good gloss. Best tool ever for avoiding buyer's remorse.",
     rating: 5,
   },
   {

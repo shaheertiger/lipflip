@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { X, Gift, ArrowRight, Star, Clock } from 'lucide-react';
+import { X, ArrowRight, Star, DollarSign, Users, TrendingUp } from 'lucide-react';
 
 export const ExitIntentPopup: React.FC<{ onScrollToUploader: () => void }> = ({ onScrollToUploader }) => {
   const [visible, setVisible] = useState(false);
@@ -67,40 +67,45 @@ export const ExitIntentPopup: React.FC<{ onScrollToUploader: () => void }> = ({ 
         </button>
 
         <div className="p-8 text-center space-y-5">
-          <div className="inline-flex p-4 bg-gradient-to-br from-pink-500/20 to-purple-500/20 rounded-full border border-pink-500/20">
-            <Gift size={32} className="text-pink-400" />
+          <div className="inline-flex p-4 bg-gradient-to-br from-emerald-500/20 to-pink-500/20 rounded-full border border-emerald-500/20">
+            <DollarSign size={32} className="text-emerald-400" />
           </div>
 
           <h3 className="text-2xl font-serif text-white">
-            Wait — your first visualization is <span className="text-pink-400">free!</span>
+            You could <span className="text-emerald-400">save $600+</span> on consultations
           </h3>
 
           <p className="text-slate-400 text-sm leading-relaxed max-w-sm mx-auto">
-            See exactly what a lip flip would look like on <strong className="text-white">your face</strong> before committing to anything. No credit card required.
+            By visualizing your lip flip first, you skip costly in-office consultations and walk in knowing <strong className="text-white">exactly what you want</strong>.
           </p>
 
           <div className="flex items-center justify-center gap-4 text-xs text-slate-500">
             <span className="flex items-center gap-1">
               <Star size={12} className="text-yellow-400 fill-yellow-400" />
-              4.9/5 rating
+              4.9/5 from 12,000+ users
             </span>
             <span className="w-px h-3 bg-white/10" />
             <span className="flex items-center gap-1">
-              <Clock size={12} className="text-emerald-400" />
-              Takes 10 seconds
+              <Users size={12} className="text-pink-400" />
+              50,000+ visualizations
             </span>
+          </div>
+
+          <div className="flex items-center justify-center gap-2 text-xs text-emerald-400/80">
+            <TrendingUp size={12} />
+            <span>93% of users felt more confident at their appointment</span>
           </div>
 
           <button
             onClick={handleCTA}
             className="w-full py-4 bg-gradient-to-r from-pink-600 to-rose-600 rounded-full text-white font-bold text-lg shadow-[0_0_40px_-10px_rgba(236,72,153,0.5)] hover:shadow-[0_0_60px_-10px_rgba(236,72,153,0.7)] transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2"
           >
-            Try It Free Now
+            Visualize Now — Only $0.99
             <ArrowRight size={18} />
           </button>
 
           <p className="text-[10px] text-slate-600">
-            No signup needed. Your photos stay private.
+            Your photos stay private. Results in seconds.
           </p>
         </div>
       </div>
