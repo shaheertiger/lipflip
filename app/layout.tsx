@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 const BASE_URL = "https://lipflipbeforeandafter.online";
@@ -152,6 +153,18 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
         <link rel="canonical" href="https://lipflipbeforeandafter.online" />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17950808078"
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads-gtag" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-17950808078');
+          `}
+        </Script>
       </head>
       <body className="antialiased min-h-screen overflow-x-hidden">
         {children}
