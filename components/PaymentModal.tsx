@@ -14,7 +14,7 @@ interface PaymentModalProps {
 }
 
 // Inner checkout form that uses Stripe hooks
-function CheckoutForm({ onSuccess }: { onSuccess: () => void }) {
+function CheckoutForm({ clientSecret, onSuccess }: { clientSecret: string; onSuccess: () => void }) {
   const stripe = useStripe();
   const elements = useElements();
   const [isProcessing, setIsProcessing] = useState(false);
@@ -40,6 +40,16 @@ function CheckoutForm({ onSuccess }: { onSuccess: () => void }) {
       setErrorMessage(error.message || 'Payment failed. Please try again.');
       setIsProcessing(false);
     } else {
+      // Payment succeeded — trigger subscription creation (fire-and-forget)
+      const paymentIntentId = clientSecret.split('_secret_')[0];
+      fetch('/api/create-subscription', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ paymentIntentId }),
+      }).catch(() => {
+        // Webhook will handle it as fallback
+      });
+
       setIsProcessing(false);
       onSuccess();
     }
@@ -193,7 +203,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, onS
                 },
               }}
             >
-              <CheckoutForm onSuccess={onSuccess} />
+              <CheckoutForm clientSecret={clientSecret} onSuccess={onSuccess} />
             </Elements>
           )}
 
@@ -202,7 +212,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, onS
             <div className="flex items-start gap-2">
               <input type="checkbox" defaultChecked className="mt-0.5 accent-pink-500 shrink-0" />
               <p className="text-[10px] text-slate-500 leading-normal">
-                By paying, you agree to a one-time charge of $0.99. After 7 days, your access converts to $4.99/week. Cancel anytime.
+                By paying, you agree to a one-time charge of $0.99. After 7 days, your access converts to $0.99/week. Cancel anytime.
               </p>
             </div>
 
