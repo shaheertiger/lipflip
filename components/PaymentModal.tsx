@@ -212,7 +212,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, onS
             <div className="flex items-start gap-2">
               <input type="checkbox" defaultChecked className="mt-0.5 accent-pink-500 shrink-0" />
               <p className="text-[10px] text-slate-500 leading-normal">
-                By paying, you agree to a one-time charge of $0.99. After 7 days, your access converts to $4.99/week. Cancel anytime.
+                By paying, you agree to a one-time charge of $0.99. After 7 days, your access converts to $0.99/week. Cancel anytime.
               </p>
             </div>
 
