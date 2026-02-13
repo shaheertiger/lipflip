@@ -31,7 +31,7 @@ function CheckoutForm({ onSuccess }: { onSuccess: () => void }) {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: window.location.href,
+        return_url: `${window.location.origin}/thank-you`,
       },
       redirect: 'if_required',
     });
@@ -40,6 +40,8 @@ function CheckoutForm({ onSuccess }: { onSuccess: () => void }) {
       setErrorMessage(error.message || 'Payment failed. Please try again.');
       setIsProcessing(false);
     } else {
+      // Push /thank-you to URL for Google Ads conversion tracking
+      window.history.pushState({}, '', '/thank-you');
       setIsProcessing(false);
       onSuccess();
     }

@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const BASE_URL = "https://lipflipbeforeandafter.online";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(BASE_URL),
   title: "Lip Flip Before and After | AI Lip Flip Visualizer - See Your Results Instantly",
   description:
     "See your lip flip before and after results instantly with our AI-powered lip flip visualizer. Upload a selfie and preview exactly what a lip flip looks like on your face. Private, instant, clinically calibrated lip flip simulation. No appointment needed.",
@@ -21,14 +24,20 @@ export const metadata: Metadata = {
     "lip flip cost",
     "lip flip vs filler",
     "subtle lip enhancement",
+    "lip flip near me",
+    "botox lip flip",
+    "lip flip procedure",
+    "lip flip botox before and after",
+    "what is a lip flip",
   ],
   openGraph: {
     title: "Lip Flip Before and After | See Your Results Instantly with AI",
     description:
       "Upload a selfie and see exactly what a lip flip looks like on your face. AI-powered lip flip before and after visualizer — private, instant, and clinically calibrated.",
+    url: BASE_URL,
     type: "website",
     locale: "en_US",
-    siteName: "LipFlip Before After",
+    siteName: "Lip Flip Before and After",
   },
   twitter: {
     card: "summary_large_image",
@@ -44,11 +53,7 @@ export const metadata: Metadata = {
     "max-video-preview": -1,
   },
   alternates: {
-    canonical: "/",
-  },
-  other: {
-    "msvalidate.01": "",
-    "bingbot": "index, follow, max-snippet:-1, max-image-preview:large",
+    canonical: BASE_URL,
   },
 };
 
@@ -62,13 +67,15 @@ export default function RootLayout({
     "@type": "WebApplication",
     "name": "Lip Flip Before and After Visualizer",
     "alternateName": "LipFlip BeforeAfter",
+    "url": "https://lipflipbeforeandafter.online",
     "description": "AI-powered lip flip before and after visualizer. Upload a selfie and see exactly what a lip flip looks like on your face instantly. Clinically calibrated, 100% private.",
     "applicationCategory": "HealthApplication",
     "operatingSystem": "Web",
     "offers": {
       "@type": "Offer",
       "price": "0.99",
-      "priceCurrency": "USD"
+      "priceCurrency": "USD",
+      "url": "https://lipflipbeforeandafter.online"
     },
     "aggregateRating": {
       "@type": "AggregateRating",
@@ -144,7 +151,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
-        <link rel="canonical" href="/" />
+        <link rel="canonical" href="https://lipflipbeforeandafter.online" />
       </head>
       <body className="antialiased min-h-screen overflow-x-hidden">
         {children}
