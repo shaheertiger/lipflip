@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="800" y2="450" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0f0a1a"/>
+      <stop offset="100%" stop-color="#1a0a20"/>
+    </linearGradient>
+    <linearGradient id="lip2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f472b6"/>
+      <stop offset="100%" stop-color="#be185d"/>
+    </linearGradient>
+    <filter id="glow2">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="dotGlow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg2)" rx="16"/>
+  <rect x="1" y="1" width="798" height="448" fill="none" stroke="white" stroke-opacity="0.05" rx="16"/>
+  <!-- Title -->
+  <text x="400" y="45" text-anchor="middle" font-family="serif" font-size="22" fill="white" font-weight="bold">Lip Flip Injection Points</text>
+  <text x="400" y="70" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#94a3b8">Typical placement of 4 to 6 injection points along the upper lip border</text>
+  <!-- Large lip illustration -->
+  <g transform="translate(400, 230)">
+    <!-- Lip outline - upper -->
+    <path d="M-160 0 Q-120 -50 -60 -35 Q-30 -55 0 -45 Q30 -55 60 -35 Q120 -50 160 0" stroke="url(#lip2)" stroke-width="2.5" fill="#be185d" fill-opacity="0.15" filter="url(#glow2)"/>
+    <!-- Cupid's bow -->
+    <path d="M-40 -30 Q-20 -50 0 -45 Q20 -50 40 -30" stroke="#f472b6" stroke-width="2" fill="none"/>
+    <!-- Lower lip -->
+    <path d="M-160 0 Q-100 70 0 80 Q100 70 160 0" stroke="#f9a8d4" stroke-width="1.5" fill="#be185d" fill-opacity="0.08"/>
+    <!-- Lip line -->
+    <path d="M-160 0 Q-80 10 0 5 Q80 10 160 0" stroke="#f9a8d4" stroke-width="1" fill="none" opacity="0.4"/>
+    <!-- Injection points with labels -->
+    <!-- Point 1 - far left -->
+    <circle cx="-110" cy="-25" r="6" fill="#ec4899" filter="url(#dotGlow)"/>
+    <circle cx="-110" cy="-25" r="3" fill="white"/>
+    <line x1="-110" y1="-35" x2="-110" y2="-70" stroke="#ec4899" stroke-width="1" stroke-dasharray="3,3" opacity="0.6"/>
+    <text x="-110" y="-80" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#f9a8d4">Point 1</text>
+    <!-- Point 2 - left of center -->
+    <circle cx="-45" cy="-40" r="6" fill="#ec4899" filter="url(#dotGlow)"/>
+    <circle cx="-45" cy="-40" r="3" fill="white"/>
+    <line x1="-45" y1="-50" x2="-45" y2="-85" stroke="#ec4899" stroke-width="1" stroke-dasharray="3,3" opacity="0.6"/>
+    <text x="-45" y="-95" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#f9a8d4">Point 2</text>
+    <!-- Point 3 - right of center -->
+    <circle cx="45" cy="-40" r="6" fill="#ec4899" filter="url(#dotGlow)"/>
+    <circle cx="45" cy="-40" r="3" fill="white"/>
+    <line x1="45" y1="-50" x2="45" y2="-85" stroke="#ec4899" stroke-width="1" stroke-dasharray="3,3" opacity="0.6"/>
+    <text x="45" y="-95" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#f9a8d4">Point 3</text>
+    <!-- Point 4 - far right -->
+    <circle cx="110" cy="-25" r="6" fill="#ec4899" filter="url(#dotGlow)"/>
+    <circle cx="110" cy="-25" r="3" fill="white"/>
+    <line x1="110" y1="-35" x2="110" y2="-70" stroke="#ec4899" stroke-width="1" stroke-dasharray="3,3" opacity="0.6"/>
+    <text x="110" y="-80" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#f9a8d4">Point 4</text>
+    <!-- Orbicularis oris label -->
+    <path d="M-180 -10 Q-180 -80 -120 -80" stroke="#7c3aed" stroke-width="1" fill="none" stroke-dasharray="4,4" opacity="0.5"/>
+    <text x="-200" y="-75" text-anchor="end" font-family="sans-serif" font-size="11" fill="#a78bfa" opacity="0.8">Orbicularis</text>
+    <text x="-200" y="-60" text-anchor="end" font-family="sans-serif" font-size="11" fill="#a78bfa" opacity="0.8">oris muscle</text>
+    <!-- Arrow showing flip direction -->
+    <g transform="translate(185, -20)">
+      <path d="M0 20 Q10 0 5 -15" stroke="#f472b6" stroke-width="1.5" fill="none"/>
+      <path d="M2 -11 L5 -15 L8 -10" stroke="#f472b6" stroke-width="1.5" fill="none"/>
+      <text x="15" y="5" font-family="sans-serif" font-size="10" fill="#f9a8d4" opacity="0.7">Lip rolls</text>
+      <text x="15" y="17" font-family="sans-serif" font-size="10" fill="#f9a8d4" opacity="0.7">outward</text>
+    </g>
+  </g>
+  <!-- Info boxes at bottom -->
+  <g transform="translate(100, 370)">
+    <rect x="0" y="0" width="170" height="55" rx="8" fill="white" fill-opacity="0.03" stroke="white" stroke-opacity="0.08"/>
+    <text x="85" y="22" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#ec4899" font-weight="bold">4-10</text>
+    <text x="85" y="42" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">Units of Botox</text>
+  </g>
+  <g transform="translate(315, 370)">
+    <rect x="0" y="0" width="170" height="55" rx="8" fill="white" fill-opacity="0.03" stroke="white" stroke-opacity="0.08"/>
+    <text x="85" y="22" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#ec4899" font-weight="bold">2-4</text>
+    <text x="85" y="42" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">Injection Points</text>
+  </g>
+  <g transform="translate(530, 370)">
+    <rect x="0" y="0" width="170" height="55" rx="8" fill="white" fill-opacity="0.03" stroke="white" stroke-opacity="0.08"/>
+    <text x="85" y="22" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#ec4899" font-weight="bold">&lt; 60s</text>
+    <text x="85" y="42" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">Injection Time</text>
+  </g>
+</svg>
