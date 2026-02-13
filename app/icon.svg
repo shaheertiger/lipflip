@@ -1,0 +1,10 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" rx="8" fill="#030712"/>
+  <rect x="0.5" y="0.5" width="31" height="31" rx="7.5" stroke="white" stroke-opacity="0.1"/>
+  <!-- Upper Lip -->
+  <path d="M5 17C8.5 19 12.5 19 16 16.5C19.5 19 23.5 19 27 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Lower Lip -->
+  <path d="M6.5 17C9.5 21.5 16 23 25.5 17" stroke="#EC4899" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Sparkle -->
+  <path d="M24 6L24.7 8L26.5 8.7L24.7 9.4L24 11.2L23.3 9.4L21.5 8.7L23.3 8L24 6Z" fill="#F472B6"/>
+</svg>

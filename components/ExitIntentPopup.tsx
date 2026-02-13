@@ -1,17 +1,18 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { X, ArrowRight, Star, DollarSign, Users, TrendingUp } from 'lucide-react';
 
 export const ExitIntentPopup: React.FC<{ onScrollToUploader: () => void }> = ({ onScrollToUploader }) => {
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
+  const dismissedRef = useRef(false);
 
   useEffect(() => {
     if (dismissed) return;
 
     const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 5 && !dismissed) {
+      if (e.clientY <= 5 && !dismissedRef.current) {
         setVisible(true);
       }
     };
@@ -22,7 +23,7 @@ export const ExitIntentPopup: React.FC<{ onScrollToUploader: () => void }> = ({ 
     const handleScroll = () => {
       scrollVelocity = lastScrollY - window.scrollY;
       lastScrollY = window.scrollY;
-      if (scrollVelocity > 80 && window.scrollY < 200 && !dismissed) {
+      if (scrollVelocity > 80 && window.scrollY < 200 && !dismissedRef.current) {
         setVisible(true);
       }
     };
@@ -41,6 +42,7 @@ export const ExitIntentPopup: React.FC<{ onScrollToUploader: () => void }> = ({ 
   }, [dismissed]);
 
   const handleDismiss = () => {
+    dismissedRef.current = true;
     setVisible(false);
     setDismissed(true);
   };
