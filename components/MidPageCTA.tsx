@@ -28,7 +28,7 @@ export const MidPageCTA: React.FC<{ onScrollToUploader: () => void }> = ({ onScr
           className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-pink-600 to-rose-600 rounded-full text-white font-bold text-lg shadow-[0_0_40px_-10px_rgba(236,72,153,0.4)] hover:shadow-[0_0_60px_-10px_rgba(236,72,153,0.6)] transition-all hover:-translate-y-0.5"
         >
           <Sparkles size={18} />
-          Visualize Now — It&apos;s Free
+          Visualize Now — Only $0.99
           <ArrowRight size={18} />
         </button>
       </div>

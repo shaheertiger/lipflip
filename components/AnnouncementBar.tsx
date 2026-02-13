@@ -22,13 +22,13 @@ export const AnnouncementBar: React.FC<{ onScrollToUploader: () => void }> = ({ 
       <div className="max-w-7xl mx-auto flex items-center justify-center gap-2 text-xs sm:text-sm font-medium">
         <Flame size={14} className="shrink-0 animate-pulse" />
         <span className="truncate">
-          <span className="font-bold">Limited:</span> Only {spotsLeft} free visualizations left today
+          <span className="font-bold">Limited:</span> Only {spotsLeft} spots left at this price today
         </span>
         <button
           onClick={onScrollToUploader}
           className="hidden sm:inline-flex ml-2 px-3 py-0.5 bg-white/20 hover:bg-white/30 rounded-full text-xs font-bold transition-colors whitespace-nowrap"
         >
-          Try Free →
+          See My Result →
         </button>
         <button
           onClick={() => setDismissed(true)}

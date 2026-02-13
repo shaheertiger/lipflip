@@ -9,9 +9,8 @@ export const Footer: React.FC = () => {
         </div>
         
         <div className="flex items-center gap-6 text-sm font-medium text-slate-400">
-          <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-          <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-          <a href="#" className="hover:text-white transition-colors">Medical Disclaimer</a>
+          <span>Privacy Policy</span>
+          <span>Terms of Service</span>
         </div>
       </div>
       

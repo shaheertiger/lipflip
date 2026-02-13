@@ -212,7 +212,7 @@ const LipFlipApp: React.FC = () => {
               onClick={scrollToUploader}
               className="bg-gradient-to-r from-pink-600 to-rose-600 text-white px-4 py-2 rounded-full text-xs sm:text-sm font-bold shadow-[0_0_20px_-5px_rgba(236,72,153,0.4)] hover:shadow-[0_0_30px_-5px_rgba(236,72,153,0.6)] transition-all"
             >
-              Try Free
+              See Your Result
             </button>
           </div>
         </div>
@@ -265,7 +265,7 @@ const LipFlipApp: React.FC = () => {
               >
                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                 <span className="relative flex items-center justify-center gap-2">
-                  Visualize My Lip Flip — Free
+                  Visualize My Lip Flip — $0.99
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </span>
               </button>
@@ -277,7 +277,7 @@ const LipFlipApp: React.FC = () => {
 
             {/* Risk Reversal Copy */}
             <p className="text-xs text-slate-500 font-light pt-2">
-              No signup required · No credit card needed · Your photos are never stored
+              No signup required · Your photos are never stored
             </p>
           </header>
         )}
