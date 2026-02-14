@@ -79,7 +79,7 @@ function CheckoutForm({ onSuccess }: { onSuccess: () => void }) {
         ) : (
           <>
             <Zap size={18} className="fill-black" />
-            Pay $0.99 & Reveal
+            Pay $0.99 & Download HD
           </>
         )}
       </button>
@@ -155,8 +155,8 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, onS
           {/* Product Summary */}
           <div className="flex items-center justify-between">
             <div className="space-y-1">
-              <h3 className="text-white font-medium text-lg">Lip Flip Analysis</h3>
-              <p className="text-sm text-slate-400">Professional AI Visualization</p>
+              <h3 className="text-white font-medium text-lg">Remove Watermark</h3>
+              <p className="text-sm text-slate-400">Download HD photo without watermark</p>
             </div>
             <div className="text-right">
               <span className="text-2xl font-bold text-white">$0.99</span>
