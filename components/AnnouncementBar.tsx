@@ -22,7 +22,7 @@ export const AnnouncementBar: React.FC<{ onScrollToUploader: () => void }> = ({ 
       <div className="max-w-7xl mx-auto flex items-center justify-center gap-2 text-xs sm:text-sm font-medium">
         <Flame size={14} className="shrink-0 animate-pulse" />
         <span className="truncate">
-          <span className="font-bold">Limited:</span> Only {spotsLeft} spots left at this price today
+          <span className="font-bold">Free Preview:</span> See your lip flip result — no payment required
         </span>
         <button
           onClick={onScrollToUploader}
