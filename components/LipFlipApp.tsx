@@ -22,6 +22,7 @@ import { MidPageCTA } from './MidPageCTA';
 import { ProcessingStatus, ImageState } from '../types';
 import { generateLipFlip, fileToBase64 } from '../services/geminiService';
 import { generateCacheKey, getCachedResult, saveToCache } from '../services/cacheService';
+import { addWatermark } from '../services/watermarkService';
 
 const BackgroundEffects = () => (
   <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
@@ -63,10 +64,12 @@ const ScanningOverlay = ({ step }: { step: string }) => (
 const LipFlipApp: React.FC = () => {
   const [originalImage, setOriginalImage] = useState<ImageState>({ file: null, previewUrl: null });
   const [processedImage, setProcessedImage] = useState<string | null>(null);
+  const [watermarkedImage, setWatermarkedImage] = useState<string | null>(null);
   const [status, setStatus] = useState<ProcessingStatus>(ProcessingStatus.IDLE);
   const [error, setError] = useState<string | null>(null);
   const [isCachedResult, setIsCachedResult] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
+  const [hasPaid, setHasPaid] = useState(false);
   const [scanStep, setScanStep] = useState<string | null>(null);
 
   const uploaderRef = useRef<HTMLDivElement>(null);
@@ -77,10 +80,12 @@ const LipFlipApp: React.FC = () => {
 
   const handleImageSelect = (file: File) => {
     setProcessedImage(null);
+    setWatermarkedImage(null);
     setStatus(ProcessingStatus.IDLE);
     setScanStep(null);
     setError(null);
     setIsCachedResult(false);
+    setHasPaid(false);
     const objectUrl = URL.createObjectURL(file);
     setOriginalImage({ file, previewUrl: objectUrl });
     setTimeout(() => {
@@ -101,18 +106,29 @@ const LipFlipApp: React.FC = () => {
        setScanStep(step);
        await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 400));
      }
-     setShowPayment(true);
+     executeGeneration();
   };
 
   const handlePaymentSuccess = () => {
     setShowPayment(false);
-    executeGeneration();
+    setHasPaid(true);
   };
 
   const handlePaymentClose = () => {
     setShowPayment(false);
-    setStatus(ProcessingStatus.IDLE);
-    setScanStep(null);
+  };
+
+  const handleDownload = () => {
+    if (hasPaid && processedImage) {
+      // Already paid — trigger clean download
+      const link = document.createElement('a');
+      link.href = processedImage;
+      link.download = 'lip-flip-before-after-result.jpg';
+      link.click();
+    } else {
+      // Not paid yet — show payment modal
+      setShowPayment(true);
+    }
   };
 
   const executeGeneration = async () => {
@@ -124,12 +140,17 @@ const LipFlipApp: React.FC = () => {
       setIsCachedResult(false);
 
       let cacheKey = "";
+      let cleanDataUrl = "";
+
       if (originalImage.file) {
         cacheKey = generateCacheKey(originalImage.file);
         const cachedData = await getCachedResult(cacheKey);
         if (cachedData) {
           await new Promise(resolve => setTimeout(resolve, 1000));
-          setProcessedImage(`data:image/jpeg;base64,${cachedData}`);
+          cleanDataUrl = `data:image/jpeg;base64,${cachedData}`;
+          setProcessedImage(cleanDataUrl);
+          const wm = await addWatermark(cleanDataUrl);
+          setWatermarkedImage(wm);
           setStatus(ProcessingStatus.COMPLETE);
           setIsCachedResult(true);
           setScanStep(null);
@@ -151,7 +172,10 @@ const LipFlipApp: React.FC = () => {
         await saveToCache(cacheKey, generatedImageBase64);
       }
 
-      setProcessedImage(`data:image/jpeg;base64,${generatedImageBase64}`);
+      cleanDataUrl = `data:image/jpeg;base64,${generatedImageBase64}`;
+      setProcessedImage(cleanDataUrl);
+      const wm = await addWatermark(cleanDataUrl);
+      setWatermarkedImage(wm);
       setStatus(ProcessingStatus.COMPLETE);
       setScanStep(null);
     } catch (err: unknown) {
@@ -165,10 +189,12 @@ const LipFlipApp: React.FC = () => {
   const handleReset = () => {
     setOriginalImage({ file: null, previewUrl: null });
     setProcessedImage(null);
+    setWatermarkedImage(null);
     setStatus(ProcessingStatus.IDLE);
     setScanStep(null);
     setError(null);
     setIsCachedResult(false);
+    setHasPaid(false);
   };
 
   return (
@@ -265,7 +291,7 @@ const LipFlipApp: React.FC = () => {
               >
                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                 <span className="relative flex items-center justify-center gap-2">
-                  Visualize My Lip Flip — $0.99
+                  Visualize My Lip Flip — Free
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </span>
               </button>
@@ -402,15 +428,26 @@ const LipFlipApp: React.FC = () => {
                       <span className="hidden sm:inline">Try Another</span>
                       <span className="sm:hidden">Reset</span>
                     </button>
-                    <a
-                      href={processedImage}
-                      download="lip-flip-before-after-result.jpg"
-                      className="flex-1 md:flex-none px-6 py-3 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 text-white rounded-full text-sm font-bold transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(236,72,153,0.3)]"
-                    >
-                      <Download size={16} />
-                      <span className="hidden sm:inline">Save Photo</span>
-                      <span className="sm:hidden">Save</span>
-                    </a>
+                    {hasPaid ? (
+                      <a
+                        href={processedImage!}
+                        download="lip-flip-before-after-result.jpg"
+                        className="flex-1 md:flex-none px-6 py-3 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 text-white rounded-full text-sm font-bold transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(236,72,153,0.3)]"
+                      >
+                        <Download size={16} />
+                        <span className="hidden sm:inline">Download HD Photo</span>
+                        <span className="sm:hidden">Download</span>
+                      </a>
+                    ) : (
+                      <button
+                        onClick={handleDownload}
+                        className="flex-1 md:flex-none px-6 py-3 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 text-white rounded-full text-sm font-bold transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(236,72,153,0.3)]"
+                      >
+                        <Download size={16} />
+                        <span className="hidden sm:inline">Remove Watermark — $0.99</span>
+                        <span className="sm:hidden">Remove Watermark</span>
+                      </button>
+                    )}
                   </div>
                </div>
 
@@ -424,7 +461,7 @@ const LipFlipApp: React.FC = () => {
                <div className="relative">
                  <ComparisonSlider
                    beforeImage={originalImage.previewUrl}
-                   afterImage={processedImage}
+                   afterImage={hasPaid ? processedImage! : (watermarkedImage || processedImage!)}
                    labelBefore="Before"
                    labelAfter="After Lip Flip"
                  />
