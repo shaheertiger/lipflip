@@ -16,7 +16,7 @@ import { PaymentModal } from './PaymentModal';
 import { AnnouncementBar } from './AnnouncementBar';
 import { StickyMobileCTA } from './StickyMobileCTA';
 import { ActivityToast } from './ActivityToast';
-import { ExitIntentPopup } from './ExitIntentPopup';
+
 import { ComparisonTable } from './ComparisonTable';
 import { MidPageCTA } from './MidPageCTA';
 import { ProcessingStatus, ImageState } from '../types';
@@ -212,9 +212,6 @@ const LipFlipApp: React.FC = () => {
 
       {/* CRO: Live Activity Social Proof Toasts */}
       <ActivityToast />
-
-      {/* CRO: Exit Intent Popup */}
-      <ExitIntentPopup onScrollToUploader={scrollToUploader} />
 
       {/* CRO: Sticky Mobile Bottom CTA */}
       <StickyMobileCTA onScrollToUploader={scrollToUploader} hasUploadedImage={!!originalImage.previewUrl} />
