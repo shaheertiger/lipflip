@@ -75,8 +75,9 @@ export default function RootLayout({
     "operatingSystem": "Web",
     "offers": {
       "@type": "Offer",
-      "price": "0.99",
+      "price": "0",
       "priceCurrency": "USD",
+      "description": "Free lip flip visualization with watermark. $0.99 to download HD photo without watermark.",
       "url": "https://lipflipbeforeandafter.online"
     },
     "aggregateRating": {
@@ -112,7 +113,7 @@ export default function RootLayout({
         "name": "How much does a lip flip before and after visualization cost?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "We charge a small one-time fee of $0.99 for a high-resolution AI visualization of your lip flip before and after results. This covers the GPU computing costs required to generate realistic, medical-grade projections."
+          "text": "Generating your lip flip visualization is completely free. If you want to download the high-resolution photo without the watermark, it's a one-time payment of $0.99."
         }
       },
       {

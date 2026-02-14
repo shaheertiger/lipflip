@@ -6,7 +6,7 @@ import { Plus, Minus, HelpCircle } from 'lucide-react';
 const faqs = [
   {
     question: "How much does it cost?",
-    answer: "We charge a small one-time fee of $0.99 for a high-resolution AI visualization. This covers the significant GPU computing costs required to generate realistic, medical-grade projections. New users also receive a trial of our premium aesthetic engine."
+    answer: "Generating your lip flip visualization is completely free! If you love the result and want to download the high-resolution photo without the watermark, it's just a one-time payment of $0.99."
   },
   {
     question: "Do you keep or share my photos?",
