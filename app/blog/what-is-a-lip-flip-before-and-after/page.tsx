@@ -867,6 +867,14 @@ export default function LipFlipBeforeAndAfterBlog() {
                 Lip Flip and Filler Together: The Complete Combination Guide
               </Link>
             </li>
+            <li>
+              <Link
+                href="/blog/lip-flip-gone-wrong"
+                className="text-pink-400 hover:text-pink-300 transition-colors"
+              >
+                Lip Flip Gone Wrong: Risks, Side Effects &amp; How to Avoid Bad Results
+              </Link>
+            </li>
           </ul>
         </div>
 
