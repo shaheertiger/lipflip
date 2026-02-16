@@ -970,6 +970,14 @@ export default function LipFlipAftercareBlog() {
                   Lip Flip Before and After: What to Expect
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/blog/lip-flip-and-filler"
+                  className="text-pink-400 hover:text-pink-300 transition-colors"
+                >
+                  Lip Flip and Filler Together: The Complete Combination Guide
+                </Link>
+              </li>
             </ul>
           </section>
         </div>
