@@ -837,6 +837,39 @@ export default function LipFlipBeforeAndAfterBlog() {
           </section>
         </div>
 
+        {/* Related Content */}
+        <div className="mt-12 pt-8 border-t border-white/10">
+          <h2 className="font-serif text-xl font-bold text-white mb-4">
+            Related Guides
+          </h2>
+          <ul className="space-y-2 text-slate-300">
+            <li>
+              <Link
+                href="/blog/what-is-a-lip-flip"
+                className="text-pink-400 hover:text-pink-300 transition-colors"
+              >
+                What Is a Lip Flip? The Complete Guide
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/blog/lip-flip-aftercare"
+                className="text-pink-400 hover:text-pink-300 transition-colors"
+              >
+                Lip Flip Aftercare: The Complete Recovery Guide
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/blog/lip-flip-and-filler"
+                className="text-pink-400 hover:text-pink-300 transition-colors"
+              >
+                Lip Flip and Filler Together: The Complete Combination Guide
+              </Link>
+            </li>
+          </ul>
+        </div>
+
         {/* Disclaimer */}
         <div className="mt-16 pt-8 border-t border-white/5">
           <p className="text-xs text-slate-600 leading-relaxed">
