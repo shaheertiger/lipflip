@@ -1947,6 +1947,14 @@ export default function WhatIsALipFlipGuide() {
                 Lip Flip Gone Wrong: Risks, Side Effects &amp; How to Avoid Bad Results
               </Link>
             </li>
+            <li>
+              <Link
+                href="/blog/how-many-units-of-botox-for-lip-flip"
+                className="text-pink-400 hover:text-pink-300 transition-colors"
+              >
+                How Many Units of Botox for a Lip Flip? Complete Dosage Guide
+              </Link>
+            </li>
           </ul>
         </div>
 

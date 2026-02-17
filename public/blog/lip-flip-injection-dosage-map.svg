@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="none">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="800" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0f0a1a"/>
+      <stop offset="100%" stop-color="#1a0a20"/>
+    </linearGradient>
+    <linearGradient id="lipGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ec4899" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ec4899" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#bg2)" rx="16"/>
+  <rect x="1" y="1" width="798" height="398" fill="none" stroke="white" stroke-opacity="0.05" rx="16"/>
+
+  <!-- Title -->
+  <text x="400" y="35" text-anchor="middle" font-family="serif" font-size="20" fill="white" font-weight="bold">Lip Flip Injection Points &amp; Unit Distribution</text>
+  <text x="400" y="55" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#94a3b8">Where the 4-10 units of Botox are placed along the upper lip</text>
+
+  <!-- Lip outline (simplified) -->
+  <g transform="translate(200, 80)">
+    <!-- Upper lip shape -->
+    <path d="M50,120 Q100,40 200,30 Q220,28 240,50 Q260,28 280,30 Q380,40 430,120" stroke="#ec4899" stroke-width="2" fill="url(#lipGrad)" stroke-opacity="0.6"/>
+    <!-- Cupid's bow -->
+    <path d="M200,30 Q220,28 240,50 Q260,28 280,30" stroke="#f472b6" stroke-width="2" fill="none"/>
+    <!-- Lower lip -->
+    <path d="M50,120 Q240,200 430,120" stroke="#ec4899" stroke-width="1.5" fill="none" stroke-opacity="0.3"/>
+    <!-- Lip line -->
+    <path d="M50,120 Q150,135 240,130 Q330,135 430,120" stroke="#ec4899" stroke-width="1" fill="none" stroke-opacity="0.4" stroke-dasharray="4,3"/>
+
+    <!-- Injection point 1 - Left -->
+    <circle cx="130" cy="80" r="8" fill="#ec4899" fill-opacity="0.3" stroke="#f472b6" stroke-width="2"/>
+    <circle cx="130" cy="80" r="3" fill="#f472b6"/>
+    <line x1="130" y1="68" x2="130" y2="45" stroke="#f472b6" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="130" y="40" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#f9a8d4" font-weight="bold">1-2 units</text>
+
+    <!-- Injection point 2 - Left of center -->
+    <circle cx="210" cy="50" r="8" fill="#ec4899" fill-opacity="0.3" stroke="#f472b6" stroke-width="2"/>
+    <circle cx="210" cy="50" r="3" fill="#f472b6"/>
+    <line x1="195" y1="42" x2="165" y2="20" stroke="#f472b6" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="145" y="16" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#f9a8d4" font-weight="bold">1-3 units</text>
+
+    <!-- Injection point 3 - Right of center -->
+    <circle cx="270" cy="50" r="8" fill="#ec4899" fill-opacity="0.3" stroke="#f472b6" stroke-width="2"/>
+    <circle cx="270" cy="50" r="3" fill="#f472b6"/>
+    <line x1="285" y1="42" x2="315" y2="20" stroke="#f472b6" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="335" y="16" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#f9a8d4" font-weight="bold">1-3 units</text>
+
+    <!-- Injection point 4 - Right -->
+    <circle cx="350" cy="80" r="8" fill="#ec4899" fill-opacity="0.3" stroke="#f472b6" stroke-width="2"/>
+    <circle cx="350" cy="80" r="3" fill="#f472b6"/>
+    <line x1="350" y1="68" x2="350" y2="45" stroke="#f472b6" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="350" y="40" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#f9a8d4" font-weight="bold">1-2 units</text>
+
+    <!-- Muscle label -->
+    <text x="240" y="160" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#64748b" font-style="italic">orbicularis oris muscle</text>
+  </g>
+
+  <!-- Info cards at bottom -->
+  <g transform="translate(50, 300)">
+    <!-- Card 1 -->
+    <rect x="0" y="0" width="220" height="75" rx="10" fill="white" fill-opacity="0.03" stroke="white" stroke-opacity="0.06"/>
+    <text x="110" y="22" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#f472b6" font-weight="bold">First-Time Patients</text>
+    <text x="110" y="42" text-anchor="middle" font-family="sans-serif" font-size="20" fill="white" font-weight="bold">4 - 6 units</text>
+    <text x="110" y="60" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">Conservative starting dose</text>
+
+    <!-- Card 2 -->
+    <rect x="240" y="0" width="220" height="75" rx="10" fill="white" fill-opacity="0.03" stroke="white" stroke-opacity="0.06"/>
+    <text x="350" y="22" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#60a5fa" font-weight="bold">Experienced Patients</text>
+    <text x="350" y="42" text-anchor="middle" font-family="sans-serif" font-size="20" fill="white" font-weight="bold">6 - 10 units</text>
+    <text x="350" y="60" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">May need more for stronger effect</text>
+
+    <!-- Card 3 -->
+    <rect x="480" y="0" width="220" height="75" rx="10" fill="white" fill-opacity="0.03" stroke="white" stroke-opacity="0.06"/>
+    <text x="590" y="22" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4ade80" font-weight="bold">Injection Sites</text>
+    <text x="590" y="42" text-anchor="middle" font-family="sans-serif" font-size="20" fill="white" font-weight="bold">2 - 4 points</text>
+    <text x="590" y="60" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">Along upper lip border</text>
+  </g>
+</svg>
