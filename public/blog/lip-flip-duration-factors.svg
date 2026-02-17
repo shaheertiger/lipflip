@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" fill="none">
+  <defs>
+    <linearGradient id="bgDur" x1="0" y1="0" x2="800" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0f0a1a"/>
+      <stop offset="100%" stop-color="#1a0a20"/>
+    </linearGradient>
+    <filter id="cardGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="800" height="480" fill="url(#bgDur)" rx="16"/>
+  <rect x="1" y="1" width="798" height="478" fill="none" stroke="white" stroke-opacity="0.05" rx="16"/>
+
+  <!-- Title -->
+  <text x="400" y="40" text-anchor="middle" font-family="serif" font-size="22" fill="white" font-weight="bold">7 Factors That Affect How Long Your Lip Flip Lasts</text>
+  <text x="400" y="60" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#94a3b8">Why some lip flips last 6 weeks and others last 12+</text>
+
+  <!-- Row 1 -->
+  <!-- Factor 1: Metabolism -->
+  <rect x="30" y="85" width="235" height="100" rx="12" fill="white" fill-opacity="0.03" stroke="#ec4899" stroke-opacity="0.25"/>
+  <text x="147" y="110" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#ec4899">⚡</text>
+  <text x="147" y="132" text-anchor="middle" font-family="sans-serif" font-size="13" fill="white" font-weight="600">Metabolism Speed</text>
+  <text x="147" y="150" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">Faster metabolism = shorter</text>
+  <text x="147" y="165" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">duration. Active people may</text>
+  <text x="147" y="178" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">see results fade sooner.</text>
+
+  <!-- Factor 2: Dosage -->
+  <rect x="283" y="85" width="235" height="100" rx="12" fill="white" fill-opacity="0.03" stroke="#a855f7" stroke-opacity="0.25"/>
+  <text x="400" y="110" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#a855f7">💉</text>
+  <text x="400" y="132" text-anchor="middle" font-family="sans-serif" font-size="13" fill="white" font-weight="600">Units Injected</text>
+  <text x="400" y="150" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">4-6 units = shorter duration</text>
+  <text x="400" y="165" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">8-10 units = longer lasting</text>
+  <text x="400" y="178" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">results overall.</text>
+
+  <!-- Factor 3: Muscle Strength -->
+  <rect x="536" y="85" width="235" height="100" rx="12" fill="white" fill-opacity="0.03" stroke="#f97316" stroke-opacity="0.25"/>
+  <text x="653" y="110" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#f97316">💪</text>
+  <text x="653" y="132" text-anchor="middle" font-family="sans-serif" font-size="13" fill="white" font-weight="600">Muscle Strength</text>
+  <text x="653" y="150" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">Stronger orbicularis oris</text>
+  <text x="653" y="165" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">muscles can overpower the</text>
+  <text x="653" y="178" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">neurotoxin faster.</text>
+
+  <!-- Row 2 -->
+  <!-- Factor 4: Product Brand -->
+  <rect x="30" y="200" width="235" height="100" rx="12" fill="white" fill-opacity="0.03" stroke="#06b6d4" stroke-opacity="0.25"/>
+  <text x="147" y="225" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#06b6d4">🏷️</text>
+  <text x="147" y="247" text-anchor="middle" font-family="sans-serif" font-size="13" fill="white" font-weight="600">Product Brand</text>
+  <text x="147" y="265" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">Botox, Dysport, Xeomin, and</text>
+  <text x="147" y="280" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">Jeuveau have slightly different</text>
+  <text x="147" y="293" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">longevity profiles.</text>
+
+  <!-- Factor 5: Treatment History -->
+  <rect x="283" y="200" width="235" height="100" rx="12" fill="white" fill-opacity="0.03" stroke="#22c55e" stroke-opacity="0.25"/>
+  <text x="400" y="225" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#22c55e">🔄</text>
+  <text x="400" y="247" text-anchor="middle" font-family="sans-serif" font-size="13" fill="white" font-weight="600">Treatment History</text>
+  <text x="400" y="265" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">Regular treatments weaken the</text>
+  <text x="400" y="280" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">muscle over time. Long-term</text>
+  <text x="400" y="293" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">patients often see longer results.</text>
+
+  <!-- Factor 6: Aftercare -->
+  <rect x="536" y="200" width="235" height="100" rx="12" fill="white" fill-opacity="0.03" stroke="#eab308" stroke-opacity="0.25"/>
+  <text x="653" y="225" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#eab308">🛡️</text>
+  <text x="653" y="247" text-anchor="middle" font-family="sans-serif" font-size="13" fill="white" font-weight="600">Aftercare Quality</text>
+  <text x="653" y="265" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">Following aftercare rules helps</text>
+  <text x="653" y="280" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">the neurotoxin settle properly</text>
+  <text x="653" y="293" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">for maximum longevity.</text>
+
+  <!-- Row 3 - centered -->
+  <!-- Factor 7: Sun & Heat Exposure -->
+  <rect x="283" y="315" width="235" height="100" rx="12" fill="white" fill-opacity="0.03" stroke="#f43f5e" stroke-opacity="0.25"/>
+  <text x="400" y="340" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#f43f5e">☀️</text>
+  <text x="400" y="362" text-anchor="middle" font-family="sans-serif" font-size="13" fill="white" font-weight="600">Sun &amp; Heat Exposure</text>
+  <text x="400" y="380" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">UV rays and heat accelerate</text>
+  <text x="400" y="395" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">neurotoxin breakdown. SPF lip</text>
+  <text x="400" y="408" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">balm can extend your results.</text>
+
+  <!-- Summary bar at bottom -->
+  <rect x="80" y="440" width="640" height="28" rx="14" fill="white" fill-opacity="0.04" stroke="#ec4899" stroke-opacity="0.15"/>
+  <text x="400" y="459" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#f9a8d4">Average lip flip duration: 8–12 weeks  |  First-timers: 6–8 weeks  |  Regular patients: 10–14 weeks</text>
+</svg>
