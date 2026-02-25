@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Clock, Sparkles, AlertCircle, Info, CheckCircle2, DollarSign, Zap, Share2, ShieldCheck, ChevronRight, HelpCircle, User, Calendar, BookOpen } from 'lucide-react';
+import { ArrowLeft, Clock, Sparkles, AlertCircle, Info, CheckCircle2, DollarSign, Zap, Share2, ShieldCheck, ChevronRight, HelpCircle, User, Calendar, BookOpen, ArrowRight } from 'lucide-react';
 import { Logo } from '@/components/Logo';
 import { Footer } from '@/components/Footer';
 
@@ -249,7 +249,7 @@ export default function LipFlipTimeline() {
                             What NOT To Do After a Lip Flip
                         </h2>
                         <p className="text-slate-300 text-lg leading-relaxed">
-                            You've spent the time and money—don't ruin your results in the first 24 hours. Neurotoxin migration is a real risk if you don't follow the "Golden Rules." If the toxin moves to the wrong part of the muscle, it can affect your speech or even make your smile look crooked.
+                            You've spent the time and money—don't ruin your results in the first 24 hours. Neurotoxin migration is a real risk if you don't follow the "Golden Rules." If the toxin moves to the wrong part of the muscle, it can affect your speech or even make your smile look crooked. Check out our <Link href="/blog/lip-flip-aftercare-guide-what-not-to-do" className="text-pink-400 font-bold hover:text-pink-300 underline underline-offset-4 decoration-pink-500/50 transition-colors">Complete Lip Flip Aftercare Guide</Link> for an in-depth survival guide on what to avoid.
                         </p>
 
                         <div className="grid sm:grid-cols-2 gap-6 pb-6">
@@ -299,7 +299,7 @@ export default function LipFlipTimeline() {
                     <section id="process-vs-fillers" className="space-y-10">
                         <h2 className="text-3xl font-serif text-white">Lip Flip vs. Lip Filler: A Deep Dive</h2>
                         <p className="text-slate-300 text-lg leading-relaxed">
-                            Still confused about <strong>what's the difference between a lip flip and lip filler?</strong> Think of it this way: <strong>Filler is for size; Flip is for shape.</strong>
+                            Still confused about <strong>what's the difference between a lip flip and lip filler?</strong> Think of it this way: <strong>Filler is for size; Flip is for shape.</strong> To see exactly how these two treatments compare in longevity, mechanism, and cost, read our <Link href="/blog/lip-flip-vs-filler" className="text-pink-400 font-bold hover:text-pink-300 underline underline-offset-4 decoration-pink-500/50 transition-colors">Lip Flip vs. Filler Deep Dive</Link>.
                         </p>
 
                         <div className="overflow-x-auto rounded-3xl border border-white/10 shadow-2xl">
