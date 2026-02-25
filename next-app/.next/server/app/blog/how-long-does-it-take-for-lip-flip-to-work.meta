@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/blog/layout,_N_T_/blog/how-long-does-it-take-for-lip-flip-to-work/layout,_N_T_/blog/how-long-does-it-take-for-lip-flip-to-work/page,_N_T_/blog/how-long-does-it-take-for-lip-flip-to-work"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/blog/how-long-does-it-take-for-lip-flip-to-work/__PAGE__",
+    "/blog/how-long-does-it-take-for-lip-flip-to-work",
+    "/blog",
+    "/_index",
+    "/_head"
+  ]
+}
