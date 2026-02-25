@@ -1,13 +1,13 @@
 # dependencies
-node_modules
-/.pnp
-.pnp.*
+node_modules/
+**/node_modules/
 
 # testing
 /coverage
 
 # next.js
-/.next/
+.next/
+**/.next/
 /out/
 
 # production
