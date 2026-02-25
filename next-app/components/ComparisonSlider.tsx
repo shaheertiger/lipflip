@@ -16,10 +16,10 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
 }) => {
   const [isResizing, setIsResizing] = useState(false);
   const [isPanning, setIsPanning] = useState(false);
-  
+
   // Slider Position (0-100%)
   const [position, setPosition] = useState(50);
-  
+
   // Zoom & Pan State
   const [scale, setScale] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
@@ -46,7 +46,7 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
     // Scaled Width = width * scale
     // Overflow X = (Scaled Width - width) / 2
     // Max Pan X (+/-) = Overflow X
-    
+
     const maxPanX = (width * currentScale - width) / 2;
     const maxPanY = (height * currentScale - height) / 2;
 
@@ -87,7 +87,7 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
     if (isPanning) {
       const dx = clientX - startPan.x;
       const dy = clientY - startPan.y;
-      
+
       const newPanRaw = {
         x: initialPan.x + dx,
         y: initialPan.y + dy
@@ -98,41 +98,60 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
   }, [isPanning, initialPan, startPan, scale]);
 
   // --- Global Mouse/Touch Listeners ---
+  const requestRef = useRef<number | null>(null);
+  const latestCoords = useRef<{ x: number, y: number } | null>(null);
+
+  const updatePosition = useCallback(() => {
+    if (!latestCoords.current) return;
+
+    if (isResizing) {
+      handleSlideMove(latestCoords.current.x);
+    } else if (isPanning) {
+      handlePanMove(latestCoords.current.x, latestCoords.current.y);
+    }
+
+    requestRef.current = requestAnimationFrame(updatePosition);
+  }, [isResizing, isPanning, handleSlideMove, handlePanMove]);
+
+  useEffect(() => {
+    if (isResizing || isPanning) {
+      requestRef.current = requestAnimationFrame(updatePosition);
+    } else {
+      if (requestRef.current) cancelAnimationFrame(requestRef.current);
+    }
+    return () => {
+      if (requestRef.current) cancelAnimationFrame(requestRef.current);
+    };
+  }, [isResizing, isPanning, updatePosition]);
 
   useEffect(() => {
     const onMouseMove = (e: MouseEvent) => {
-      if (isResizing) {
-        e.preventDefault();
-        handleSlideMove(e.clientX);
-      } else if (isPanning) {
-        e.preventDefault();
-        handlePanMove(e.clientX, e.clientY);
+      if (isResizing || isPanning) {
+        latestCoords.current = { x: e.clientX, y: e.clientY };
       }
     };
 
     const onMouseUp = () => {
       setIsResizing(false);
       setIsPanning(false);
+      latestCoords.current = null;
     };
 
     const onTouchMove = (e: TouchEvent) => {
-      if (isResizing && e.touches.length > 0) {
-        // e.preventDefault(); // Sometimes needed, but can block scroll
-        handleSlideMove(e.touches[0].clientX);
-      } else if (isPanning && e.touches.length > 0) {
-        // Prevent default only if panning to stop scrolling page
-        if (e.cancelable) e.preventDefault(); 
-        handlePanMove(e.touches[0].clientX, e.touches[0].clientY);
+      if ((isResizing || isPanning) && e.touches.length > 0) {
+        latestCoords.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        if (isPanning && e.cancelable) e.preventDefault();
       }
     };
 
     const onTouchEnd = () => {
       setIsResizing(false);
       setIsPanning(false);
+      latestCoords.current = null;
     };
 
     if (isResizing || isPanning) {
-      window.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('mousemove', onMouseMove, { passive: true });
       window.addEventListener('mouseup', onMouseUp);
       window.addEventListener('touchmove', onTouchMove, { passive: false });
       window.addEventListener('touchend', onTouchEnd);
@@ -144,7 +163,7 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
       window.removeEventListener('touchmove', onTouchMove);
       window.removeEventListener('touchend', onTouchEnd);
     };
-  }, [isResizing, isPanning, handleSlideMove, handlePanMove]);
+  }, [isResizing, isPanning]);
 
   // --- Zoom Controls ---
 
@@ -176,17 +195,17 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
     transition: isPanning ? 'none' : 'transform 0.3s ease-out' // Smooth zoom, instant pan
   };
 
-  const containerCursor = isResizing 
-    ? 'cursor-ew-resize' 
-    : scale > 1 
-      ? isPanning ? 'cursor-grabbing' : 'cursor-grab' 
+  const containerCursor = isResizing
+    ? 'cursor-ew-resize'
+    : scale > 1
+      ? isPanning ? 'cursor-grabbing' : 'cursor-grab'
       : 'cursor-default';
 
   return (
     <div className="relative group w-full max-w-4xl mx-auto select-none">
-      
+
       {/* Main Container */}
-      <div 
+      <div
         className={`relative aspect-[4/5] md:aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-black/40 ${containerCursor}`}
         ref={containerRef}
         onMouseDown={(e) => {
@@ -199,7 +218,7 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
       >
         {/* Images Wrapper */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
-          
+
           {/* After Image (Background) */}
           <div className="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden">
             <img
@@ -216,9 +235,9 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
             style={{ width: `${position}%` }}
           >
             {/* Inner container for before image to counteract clip width and apply transform */}
-            <div 
-               className="absolute top-0 left-0 h-full"
-               style={{ width: containerRef.current?.offsetWidth || '100%' }}
+            <div
+              className="absolute top-0 left-0 h-full"
+              style={{ width: containerRef.current?.offsetWidth || '100%' }}
             >
               <img
                 src={beforeImage}
@@ -234,7 +253,7 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
 
         {/* Labels - fade out when zoomed to avoid clutter? Or keep them. */}
         <div className={`transition-opacity duration-300 ${scale > 1.2 ? 'opacity-0' : 'opacity-100'}`}>
-           <div className="absolute top-6 right-6 bg-black/40 backdrop-blur-md text-white text-[10px] tracking-widest uppercase font-bold px-4 py-2 rounded-full pointer-events-none z-20 border border-white/10 shadow-lg">
+          <div className="absolute top-6 right-6 bg-black/40 backdrop-blur-md text-white text-[10px] tracking-widest uppercase font-bold px-4 py-2 rounded-full pointer-events-none z-20 border border-white/10 shadow-lg">
             {labelAfter}
           </div>
           <div className="absolute top-6 left-6 bg-white/20 backdrop-blur-md text-white text-[10px] tracking-widest uppercase font-bold px-4 py-2 rounded-full pointer-events-none z-20 border border-white/20 shadow-lg">
@@ -243,7 +262,7 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
         </div>
 
         {/* Divider Line */}
-        <div 
+        <div
           className="absolute inset-y-0 w-0.5 bg-white/50 backdrop-blur-sm z-30 pointer-events-none shadow-[0_0_15px_rgba(255,255,255,0.3)]"
           style={{ left: `${position}%` }}
         />
@@ -265,7 +284,7 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
       {/* Control Bar */}
       <div className="flex items-center justify-center gap-2 mt-4">
         <div className="flex items-center gap-1 bg-white/5 backdrop-blur-md border border-white/10 p-1 rounded-full shadow-xl">
-          <button 
+          <button
             onClick={handleZoomOut}
             disabled={scale <= 1}
             className="p-2 hover:bg-white/10 rounded-full text-white/80 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
@@ -273,16 +292,16 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
           >
             <ZoomOut size={18} />
           </button>
-          
+
           <div className="w-px h-4 bg-white/10 mx-1" />
-          
+
           <span className="text-xs font-medium text-white/70 w-12 text-center select-none">
             {Math.round(scale * 100)}%
           </span>
-          
+
           <div className="w-px h-4 bg-white/10 mx-1" />
 
-          <button 
+          <button
             onClick={handleZoomIn}
             disabled={scale >= 4}
             className="p-2 hover:bg-white/10 rounded-full text-white/80 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
@@ -292,7 +311,7 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
           </button>
         </div>
 
-        <button 
+        <button
           onClick={handleReset}
           className="p-3 bg-white/5 backdrop-blur-md border border-white/10 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors shadow-xl"
           title="Reset View"
@@ -302,8 +321,8 @@ export const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
 
         {scale > 1 && (
           <div className="flex items-center gap-2 px-4 py-2 bg-pink-500/20 border border-pink-500/20 rounded-full text-pink-200 text-xs animate-fade-in">
-             <Move size={12} />
-             <span>Drag to pan</span>
+            <Move size={12} />
+            <span>Drag to pan</span>
           </div>
         )}
       </div>

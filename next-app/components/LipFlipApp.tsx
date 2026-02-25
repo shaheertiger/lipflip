@@ -1,28 +1,38 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
+import dynamic from 'next/dynamic';
 import { RotateCcw, AlertCircle, Camera, Wand2, Download, ArrowRight, Sparkles, Heart, Scan, Activity } from 'lucide-react';
 import { ImageUploader } from './ImageUploader';
 import { ComparisonSlider } from './ComparisonSlider';
 import { Logo } from './Logo';
-import { HowItWorks } from './HowItWorks';
-import { Testimonials } from './Testimonials';
-import { TrustSection } from './TrustSection';
-import { Footer } from './Footer';
-import { SocialProofLogos } from './SocialProofLogos';
-import { StatsSection } from './StatsSection';
-import { FAQ } from './FAQ';
-import { PaymentModal } from './PaymentModal';
 import { ProcessingStatus, ImageState } from '../types';
 import { generateLipFlip, fileToBase64 } from '../services/geminiService';
 import { generateCacheKey, getCachedResult, saveToCache } from '../services/cacheService';
+import { resizeImage } from '../services/imageUtils';
 
-const BackgroundEffects = () => (
+// Lazy load non-critical sections
+const HowItWorks = dynamic(() => import('./HowItWorks').then(m => m.HowItWorks), { ssr: false });
+const Testimonials = dynamic(() => import('./Testimonials').then(m => m.Testimonials), { ssr: false });
+const TrustSection = dynamic(() => import('./TrustSection').then(m => m.TrustSection), { ssr: false });
+const Footer = dynamic(() => import('./Footer').then(m => m.Footer), { ssr: false });
+const SocialProofLogos = dynamic(() => import('./SocialProofLogos').then(m => m.SocialProofLogos), { ssr: false });
+const StatsSection = dynamic(() => import('./StatsSection').then(m => m.StatsSection), { ssr: false });
+const FAQ = dynamic(() => import('./FAQ').then(m => m.FAQ), { ssr: false });
+const PaymentModal = dynamic(() => import('./PaymentModal').then(m => m.PaymentModal), { ssr: false });
+
+const BackgroundEffects = React.memo(() => (
   <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-    <div className="absolute top-0 left-1/4 w-96 h-96 bg-pink-600/20 rounded-full blur-[128px] animate-blob mix-blend-screen" />
-    <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[128px] animate-blob animation-delay-2000 mix-blend-screen" />
+    {/* Reduced blur and animation complexity for mobile */}
+    <div className="absolute top-0 left-1/4 w-72 md:w-96 h-72 md:h-96 bg-pink-600/20 rounded-full blur-[64px] md:blur-[128px] animate-blob mix-blend-screen" />
+    <div className="absolute bottom-0 right-1/4 w-72 md:w-96 h-72 md:h-96 bg-purple-600/20 rounded-full blur-[64px] md:blur-[128px] animate-blob animation-delay-2000 mix-blend-screen" />
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03]" />
     <style>{`
+      @media (max-width: 768px) {
+        .animate-blob {
+          animation: none !important;
+        }
+      }
       @keyframes scan {
         0% { top: 0%; opacity: 0; }
         15% { opacity: 1; }
@@ -31,20 +41,21 @@ const BackgroundEffects = () => (
       }
     `}</style>
   </div>
-);
+));
+BackgroundEffects.displayName = 'BackgroundEffects';
 
-const ScanningOverlay = ({ step }: { step: string }) => (
+const ScanningOverlay = React.memo(({ step }: { step: string }) => (
   <div className="absolute inset-0 z-20 overflow-hidden rounded-3xl pointer-events-none select-none">
     {/* Grid Overlay */}
     <div className="absolute inset-0 bg-emerald-500/5" />
     <div className="absolute inset-0 bg-[linear-gradient(rgba(16,185,129,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.1)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />
-    
+
     {/* Scan Line */}
-    <div 
-      className="absolute left-0 w-full h-1 bg-emerald-400/80 shadow-[0_0_25px_rgba(52,211,153,0.6)] animate-[scan_2s_ease-in-out_infinite]" 
+    <div
+      className="absolute left-0 w-full h-1 bg-emerald-400/80 shadow-[0_0_25px_rgba(52,211,153,0.6)] animate-[scan_2s_ease-in-out_infinite]"
       style={{ top: '0%' }}
     />
-    
+
     {/* Tech Corners */}
     <div className="absolute top-6 left-6 w-8 h-8 border-l-2 border-t-2 border-emerald-400/50 rounded-tl-lg" />
     <div className="absolute top-6 right-6 w-8 h-8 border-r-2 border-t-2 border-emerald-400/50 rounded-tr-lg" />
@@ -59,7 +70,8 @@ const ScanningOverlay = ({ step }: { step: string }) => (
       </div>
     </div>
   </div>
-);
+));
+ScanningOverlay.displayName = 'ScanningOverlay';
 
 const LipFlipApp: React.FC = () => {
   const [originalImage, setOriginalImage] = useState<ImageState>({ file: null, previewUrl: null });
@@ -76,38 +88,49 @@ const LipFlipApp: React.FC = () => {
     uploaderRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
-  const handleImageSelect = (file: File) => {
+  const handleImageSelect = async (file: File) => {
     setProcessedImage(null);
     setStatus(ProcessingStatus.IDLE);
     setScanStep(null);
     setError(null);
     setIsCachedResult(false);
-    const objectUrl = URL.createObjectURL(file);
-    setOriginalImage({ file, previewUrl: objectUrl });
-    setTimeout(() => {
+
+    try {
+      // Resize for UI and API efficiency
+      const optimizedFile = await resizeImage(file, 1200);
+      const objectUrl = URL.createObjectURL(optimizedFile);
+      setOriginalImage({ file: optimizedFile, previewUrl: objectUrl });
+
+      setTimeout(() => {
         window.scrollTo({ top: 100, behavior: 'smooth' });
-    }, 100);
+      }, 100);
+    } catch (err) {
+      console.error("Image optimization failed:", err);
+      // Fallback to original
+      const objectUrl = URL.createObjectURL(file);
+      setOriginalImage({ file, previewUrl: objectUrl });
+    }
   };
 
   const initiateGeneration = async () => {
-     setStatus(ProcessingStatus.PROCESSING);
-     
-     // Simulate realistic AI analysis steps
-     const steps = [
-       "Scanning facial geometry...",
-       "Mapping vermilion border...",
-       "Analyzing muscle structure...",
-       "Projecting tissue relaxation...",
-       "Rendering preview..."
-     ];
+    setStatus(ProcessingStatus.PROCESSING);
 
-     for (const step of steps) {
-       setScanStep(step);
-       // Variable timing for realism
-       await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 400));
-     }
-     
-     setShowPayment(true);
+    // Simulate realistic AI analysis steps
+    const steps = [
+      "Scanning facial geometry...",
+      "Mapping vermilion border...",
+      "Analyzing muscle structure...",
+      "Projecting tissue relaxation...",
+      "Rendering preview..."
+    ];
+
+    for (const step of steps) {
+      setScanStep(step);
+      // Variable timing for realism
+      await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 400));
+    }
+
+    setShowPayment(true);
   };
 
   const handlePaymentSuccess = () => {
@@ -135,9 +158,9 @@ const LipFlipApp: React.FC = () => {
       if (originalImage.file) {
         cacheKey = generateCacheKey(originalImage.file);
         const cachedData = await getCachedResult(cacheKey);
-        
+
         if (cachedData) {
-          await new Promise(resolve => setTimeout(resolve, 1000)); 
+          await new Promise(resolve => setTimeout(resolve, 1000));
           setProcessedImage(`data:image/jpeg;base64,${cachedData}`);
           setStatus(ProcessingStatus.COMPLETE);
           setIsCachedResult(true);
@@ -158,7 +181,7 @@ const LipFlipApp: React.FC = () => {
       }
 
       const generatedImageBase64 = await generateLipFlip(base64Data, mimeType);
-      
+
       // 3. Save to Cache
       if (cacheKey) {
         await saveToCache(cacheKey, generatedImageBase64);
@@ -188,12 +211,12 @@ const LipFlipApp: React.FC = () => {
   return (
     <div className="relative min-h-screen text-slate-200 font-sans flex flex-col overflow-x-hidden">
       <BackgroundEffects />
-      
+
       {/* Payment Modal */}
-      <PaymentModal 
-        isOpen={showPayment} 
-        onClose={handlePaymentClose} 
-        onSuccess={handlePaymentSuccess} 
+      <PaymentModal
+        isOpen={showPayment}
+        onClose={handlePaymentClose}
+        onSuccess={handlePaymentSuccess}
       />
 
       {/* Navbar */}
@@ -202,13 +225,13 @@ const LipFlipApp: React.FC = () => {
           <div onClick={() => window.location.reload()} className="scale-90 md:scale-100 origin-left">
             <Logo />
           </div>
-          
+
           <div className="flex items-center gap-6">
             <span className="hidden md:flex items-center gap-2 text-sm font-medium text-slate-400">
               <Sparkles size={14} className="text-pink-500" />
               <span>Aesthetic AI Engine</span>
             </span>
-            <button 
+            <button
               onClick={scrollToUploader}
               className="md:hidden bg-pink-600/20 text-pink-300 px-3 py-1.5 rounded-full text-xs font-semibold border border-pink-500/30"
             >
@@ -219,29 +242,29 @@ const LipFlipApp: React.FC = () => {
       </nav>
 
       <main className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pt-24 md:pt-32 pb-10 flex-grow w-full">
-        
+
         {/* Header Content */}
         {!processedImage && (
           <div className="text-center mb-12 md:mb-16 space-y-6 md:space-y-8 animate-fade-in relative">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-pink-500/20 bg-pink-500/10 backdrop-blur-sm text-[10px] md:text-xs font-semibold tracking-wider uppercase text-pink-300 mb-2 md:mb-4 shadow-[0_0_20px_rgba(236,72,153,0.3)] hover:scale-105 transition-transform cursor-default">
-              <Heart size={12} className="fill-pink-500 text-pink-500 animate-pulse"/>
+              <Heart size={12} className="fill-pink-500 text-pink-500 animate-pulse" />
               #1 Rated Lip Flip Visualizer
             </div>
-            
+
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-serif text-white tracking-tight leading-[1.1] md:leading-[1.1]">
-              Don't guess with <br/>
+              Don't guess with <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-rose-400 to-pink-500">
                 your face.
               </span>
             </h1>
-            
+
             <p className="text-base md:text-xl text-slate-300 max-w-xl mx-auto font-light leading-relaxed px-2">
-              Thinking about a lip flip? Visualize the <span className="text-white font-medium">exact results</span> on your own photo instantly. 
+              Thinking about a lip flip? Visualize the <span className="text-white font-medium">exact results</span> on your own photo instantly.
               <span className="hidden sm:inline"> Private. Instant. High-Definition Results.</span>
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 px-2">
-              <button 
+              <button
                 onClick={scrollToUploader}
                 className="w-full sm:w-auto group relative px-8 py-4 bg-gradient-to-r from-pink-600 to-rose-600 rounded-full text-white font-bold text-lg tracking-wide shadow-[0_0_40px_-10px_rgba(236,72,153,0.5)] hover:shadow-[0_0_60px_-10px_rgba(236,72,153,0.7)] transition-all hover:-translate-y-0.5 active:translate-y-0 overflow-hidden"
               >
@@ -252,8 +275,8 @@ const LipFlipApp: React.FC = () => {
                 </span>
               </button>
               <div className="flex items-center gap-2 text-sm text-slate-400 font-medium px-4">
-                 <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                 <span>243 people using it now</span>
+                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>243 people using it now</span>
               </div>
             </div>
           </div>
@@ -261,29 +284,29 @@ const LipFlipApp: React.FC = () => {
 
         {/* Core Interaction Area */}
         <div className="max-w-4xl mx-auto transition-all duration-700 ease-in-out">
-          
+
           {/* 1. Upload State */}
           {!originalImage.previewUrl && (
             <div className="animate-fade-in space-y-12 md:space-y-16">
               <SocialProofLogos />
-              
+
               <HowItWorks />
-              
+
               <div ref={uploaderRef} className="scroll-mt-24 md:scroll-mt-32">
-                  <div className="glass-panel p-2 rounded-3xl shadow-2xl shadow-black/50 ring-1 ring-white/10 relative">
-                     {/* Decorative background glow behind uploader */}
-                     <div className="absolute -inset-1 bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl blur opacity-30 pointer-events-none" />
-                     <ImageUploader onImageSelect={handleImageSelect} />
-                  </div>
-                  <div className="text-center mt-6 text-slate-500 text-xs md:text-sm font-light px-4">
-                     <span className="opacity-75">Supported formats: JPG, PNG, WEBP. Max file size: 10MB.</span>
-                  </div>
+                <div className="glass-panel p-2 rounded-3xl shadow-2xl shadow-black/50 ring-1 ring-white/10 relative">
+                  {/* Decorative background glow behind uploader */}
+                  <div className="absolute -inset-1 bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl blur opacity-30 pointer-events-none" />
+                  <ImageUploader onImageSelect={handleImageSelect} />
+                </div>
+                <div className="text-center mt-6 text-slate-500 text-xs md:text-sm font-light px-4">
+                  <span className="opacity-75">Supported formats: JPG, PNG, WEBP. Max file size: 10MB.</span>
+                </div>
               </div>
 
               <StatsSection />
-              
+
               <TrustSection />
-              
+
               <Testimonials />
 
               <FAQ />
@@ -293,16 +316,16 @@ const LipFlipApp: React.FC = () => {
           {/* 2. Preview & Generate State */}
           {originalImage.previewUrl && !processedImage && (
             <div className="flex flex-col items-center animate-fade-in py-6 md:py-10">
-              
+
               <div className="relative group w-full max-w-sm aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-white/10 mb-8 md:mb-10 bg-black/50">
-                
+
                 {/* Image */}
-                <img 
-                  src={originalImage.previewUrl} 
-                  alt="Original" 
+                <img
+                  src={originalImage.previewUrl}
+                  alt="Original"
                   className="w-full h-full object-cover opacity-90 transition-opacity duration-500"
                 />
-                
+
                 {/* Scanning Overlay (Conditional) */}
                 {status === ProcessingStatus.PROCESSING && scanStep && (
                   <ScanningOverlay step={scanStep} />
@@ -339,7 +362,7 @@ const LipFlipApp: React.FC = () => {
                     ) : (
                       <>
                         <Wand2 size={20} className="fill-white/20" />
-                        <span>Reveal My Lip Flip</span> 
+                        <span>Reveal My Lip Flip</span>
                       </>
                     )}
                   </div>
@@ -366,88 +389,88 @@ const LipFlipApp: React.FC = () => {
           {/* 3. Result State (The Reveal) */}
           {originalImage.previewUrl && processedImage && (
             <div className="space-y-8 md:space-y-10 animate-fade-in pt-4 md:pt-6">
-               <div className="flex flex-col md:flex-row items-end justify-between gap-6 pb-6 border-b border-white/5">
-                  <div className="space-y-2 w-full md:w-auto">
-                    <h2 className="text-3xl md:text-5xl font-serif text-white">Your New Look</h2>
-                    <p className="text-pink-200/80 font-light flex items-center gap-2 text-lg">
-                      <Sparkles size={16} className="text-pink-500" />
-                      Subtle. Natural. You.
-                    </p>
-                  </div>
-                  <div className="flex gap-3 w-full md:w-auto">
-                     <button
-                      onClick={handleReset}
-                      className="flex-1 md:flex-none px-6 py-3 bg-white/5 hover:bg-white/10 text-white rounded-full text-sm font-medium transition-colors border border-white/10 flex items-center justify-center gap-2"
-                    >
-                      <Camera size={16} />
-                      <span className="hidden sm:inline">Try Another</span>
-                      <span className="sm:hidden">Reset</span>
-                    </button>
-                    <a 
-                      href={processedImage} 
-                      download="luxelip-result.jpg"
-                      className="flex-1 md:flex-none px-6 py-3 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 text-white rounded-full text-sm font-bold transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(236,72,153,0.3)]"
-                    >
-                      <Download size={16} />
-                      <span className="hidden sm:inline">Save Photo</span>
-                      <span className="sm:hidden">Save</span>
-                    </a>
-                  </div>
-               </div>
-              
+              <div className="flex flex-col md:flex-row items-end justify-between gap-6 pb-6 border-b border-white/5">
+                <div className="space-y-2 w-full md:w-auto">
+                  <h2 className="text-3xl md:text-5xl font-serif text-white">Your New Look</h2>
+                  <p className="text-pink-200/80 font-light flex items-center gap-2 text-lg">
+                    <Sparkles size={16} className="text-pink-500" />
+                    Subtle. Natural. You.
+                  </p>
+                </div>
+                <div className="flex gap-3 w-full md:w-auto">
+                  <button
+                    onClick={handleReset}
+                    className="flex-1 md:flex-none px-6 py-3 bg-white/5 hover:bg-white/10 text-white rounded-full text-sm font-medium transition-colors border border-white/10 flex items-center justify-center gap-2"
+                  >
+                    <Camera size={16} />
+                    <span className="hidden sm:inline">Try Another</span>
+                    <span className="sm:hidden">Reset</span>
+                  </button>
+                  <a
+                    href={processedImage}
+                    download="luxelip-result.jpg"
+                    className="flex-1 md:flex-none px-6 py-3 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 text-white rounded-full text-sm font-bold transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(236,72,153,0.3)]"
+                  >
+                    <Download size={16} />
+                    <span className="hidden sm:inline">Save Photo</span>
+                    <span className="sm:hidden">Save</span>
+                  </a>
+                </div>
+              </div>
+
               {isCachedResult && (
-                 <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-lg w-fit text-xs text-emerald-300 animate-fade-in">
-                    <Sparkles size={12} />
-                    <span>Restored from history</span>
-                 </div>
+                <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-lg w-fit text-xs text-emerald-300 animate-fade-in">
+                  <Sparkles size={12} />
+                  <span>Restored from history</span>
+                </div>
               )}
 
-               <div className="relative">
-                 <ComparisonSlider 
-                   beforeImage={originalImage.previewUrl} 
-                   afterImage={processedImage}
-                   labelBefore="Natural"
-                   labelAfter="Lip Flip"
-                 />
-                 <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-3/4 h-12 bg-pink-500/20 blur-[60px] pointer-events-none" />
-               </div>
+              <div className="relative">
+                <ComparisonSlider
+                  beforeImage={originalImage.previewUrl}
+                  afterImage={processedImage}
+                  labelBefore="Natural"
+                  labelAfter="Lip Flip"
+                />
+                <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-3/4 h-12 bg-pink-500/20 blur-[60px] pointer-events-none" />
+              </div>
 
-               <div className="glass-panel p-6 md:p-8 rounded-2xl border-l-2 border-l-pink-500 mt-12">
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-full bg-pink-500/10 text-pink-400 shrink-0">
-                      <Sparkles size={20} />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-serif text-white mb-2">Aesthetic Analysis</h3>
-                      <p className="text-slate-300 text-sm leading-relaxed font-light">
-                        Our AI has visualized a subtle relaxation of the orbicularis oris muscle (the 'lip flip' effect). 
-                        Notice how the upper vermilion border is gently rolled outward, creating a fuller appearance 
-                        without the projection associated with fillers. This mimics a natural, hydrated lift.
-                      </p>
-                    </div>
+              <div className="glass-panel p-6 md:p-8 rounded-2xl border-l-2 border-l-pink-500 mt-12">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-full bg-pink-500/10 text-pink-400 shrink-0">
+                    <Sparkles size={20} />
                   </div>
-               </div>
+                  <div>
+                    <h3 className="text-xl font-serif text-white mb-2">Aesthetic Analysis</h3>
+                    <p className="text-slate-300 text-sm leading-relaxed font-light">
+                      Our AI has visualized a subtle relaxation of the orbicularis oris muscle (the 'lip flip' effect).
+                      Notice how the upper vermilion border is gently rolled outward, creating a fuller appearance
+                      without the projection associated with fillers. This mimics a natural, hydrated lift.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-               {/* Post-Result CTA */}
-               <div className="mt-20 text-center space-y-6 py-12 border-t border-white/5">
-                  <h3 className="text-2xl font-serif text-white">Loving the result?</h3>
-                  <p className="text-slate-400 max-w-lg mx-auto px-4">
-                    Save your photo and show it to a licensed aesthetic injector. 
-                    Visual aids help you get exactly the subtle result you want.
-                  </p>
-                  <button 
-                    onClick={handleReset}
-                    className="text-pink-400 hover:text-pink-300 font-medium flex items-center justify-center gap-2 mx-auto transition-colors"
-                  >
-                    <RotateCcw size={16} />
-                    Visualize another angle
-                  </button>
-               </div>
+              {/* Post-Result CTA */}
+              <div className="mt-20 text-center space-y-6 py-12 border-t border-white/5">
+                <h3 className="text-2xl font-serif text-white">Loving the result?</h3>
+                <p className="text-slate-400 max-w-lg mx-auto px-4">
+                  Save your photo and show it to a licensed aesthetic injector.
+                  Visual aids help you get exactly the subtle result you want.
+                </p>
+                <button
+                  onClick={handleReset}
+                  className="text-pink-400 hover:text-pink-300 font-medium flex items-center justify-center gap-2 mx-auto transition-colors"
+                >
+                  <RotateCcw size={16} />
+                  Visualize another angle
+                </button>
+              </div>
             </div>
           )}
         </div>
       </main>
-      
+
       <Footer />
     </div>
   );
