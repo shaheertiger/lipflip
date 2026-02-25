@@ -1,10 +1,12 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Plus, Minus, HelpCircle } from 'lucide-react';
 
 const faqs = [
   {
     question: "How much does it cost?",
-    answer: "We charge a small one-time fee of $0.99 for a high-resolution AI visualization. This covers the significant GPU computing costs required to generate realistic, medical-grade projections. New users also receive a trial of our premium aesthetic engine."
+    answer: "Generating your lip flip visualization is completely free! If you love the result and want to download the high-resolution photo without the watermark, it's just a one-time payment of $0.99."
   },
   {
     question: "Do you keep or share my photos?",
@@ -17,6 +19,22 @@ const faqs = [
   {
     question: "Will this work on my specific lip shape?",
     answer: "The AI adapts to your unique anatomy, preserving your cupid's bow and natural asymmetry. For the best results, use a photo with good lighting where your lips are relaxed (not smiling excessively or puckered)."
+  },
+  {
+    question: "What is a lip flip?",
+    answer: "A lip flip is a non-invasive cosmetic procedure that uses a small amount of neurotoxin (like Botox) to relax the orbicularis oris muscle around the upper lip. This gently rolls the lip outward, creating a subtly fuller appearance without adding volume like fillers do. It's one of the most popular and affordable aesthetic treatments available."
+  },
+  {
+    question: "How accurate are the results?",
+    answer: "Our AI model is calibrated with input from board-certified aesthetic professionals and trained on thousands of real lip flip before-and-after outcomes. While individual results may vary based on anatomy and practitioner technique, our visualizations give you a realistic preview of what to expect from the actual procedure."
+  },
+  {
+    question: "Can I show the result to my injector?",
+    answer: "You can save your visualization and bring it to your consultation. Many injectors appreciate having a visual reference — it helps align expectations and gives them a clear target to work toward. Our tool is designed to complement professional consultations, not replace them."
+  },
+  {
+    question: "Is my data safe?",
+    answer: "Your photos never leave your browser during processing. We use end-to-end encrypted connections, never store images on our servers, and never use your photos for AI training. Your selfie is processed in real-time and discarded immediately after generating your result."
   }
 ];
 

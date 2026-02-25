@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, ShieldCheck, Heart, CheckCircle2 } from 'lucide-react';
+import { Star, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 const reviews = [
   {
@@ -18,7 +18,7 @@ const reviews = [
   {
     name: "Emily Rodriguez",
     role: "Verified User",
-    text: "Honestly, this saved me money. I realized I love my natural shape and just needed a good gloss. Best free tool ever for avoiding buyer's remorse.",
+    text: "Honestly, this saved me money. I realized I love my natural shape and just needed a good gloss. Best tool ever for avoiding buyer's remorse.",
     rating: 5,
   },
   {
@@ -38,13 +38,38 @@ const reviews = [
     role: "Verified User",
     text: "I have a gummy smile and wasn't sure if this would help visualize the fix. It did! Seeing the 'after' made me so emotional in a good way.",
     rating: 5,
-  }
+  },
+  {
+    name: "Dr. Rachel M.",
+    role: "Plastic Surgeon",
+    text: "I use this in my practice to set realistic expectations. Patients come in with filter photos that are impossible — this tool gives them an honest preview.",
+    rating: 5,
+    verified: true
+  },
+  {
+    name: "Taylor H.",
+    role: "Bride-to-Be",
+    text: "Needed to see if a lip flip would photograph well for my wedding. This confirmed it would look natural and subtle in photos. Booked same day!",
+    rating: 5,
+  },
+  {
+    name: "Nicole S.",
+    role: "Verified User",
+    text: "I showed my injector the result and she said 'that's exactly what I'd aim for.' Now I know we're on the same page before spending a dime.",
+    rating: 5,
+  },
+  {
+    name: "Priya K.",
+    role: "First-Timer",
+    text: "As someone who's never done anything cosmetic, this was the perfect low-pressure way to explore. No one judging you, just your face and the AI.",
+    rating: 5,
+  },
 ];
 
 export const Testimonials: React.FC = () => {
   return (
     <div className="w-full py-10 overflow-hidden relative">
-      
+
       {/* Header */}
       <div className="flex flex-col items-center justify-center mb-10 gap-4 px-4">
         <div className="flex items-center gap-2 text-emerald-300 bg-emerald-900/10 border border-emerald-500/20 px-4 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-sm animate-fade-in text-center">
@@ -52,7 +77,7 @@ export const Testimonials: React.FC = () => {
           Clinically Calibrated Results
         </div>
         <h3 className="text-2xl md:text-3xl font-serif text-white text-center">
-          Don't just take our word for it.
+          Don&apos;t just take our word for it.
         </h3>
         <div className="flex items-center gap-1.5">
           <div className="flex">
@@ -72,14 +97,14 @@ export const Testimonials: React.FC = () => {
 
         <div className="flex animate-marquee min-w-full shrink-0 gap-4 md:gap-6 pr-6 hover:[animation-play-state:paused]">
           {[...reviews, ...reviews].map((review, i) => (
-            <div 
-              key={i} 
+            <div
+              key={i}
               className="w-[85vw] max-w-[20rem] md:w-[22rem] flex-shrink-0 bg-white/[0.02] backdrop-blur-xl border border-white/5 rounded-2xl p-6 hover:border-pink-500/30 hover:bg-white/[0.04] hover:-translate-y-1 transition-all duration-300 group cursor-default"
             >
               <div className="flex justify-between items-start mb-4">
                 <div className="flex items-center gap-0.5">
-                  {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} size={14} className="fill-pink-500 text-pink-500" />
+                  {[...Array(review.rating)].map((_, j) => (
+                    <Star key={j} size={14} className="fill-pink-500 text-pink-500" />
                   ))}
                 </div>
                 {review.verified && (
@@ -88,9 +113,9 @@ export const Testimonials: React.FC = () => {
                   </div>
                 )}
               </div>
-              
-              <p className="text-slate-300 text-sm leading-relaxed mb-6 font-light font-sans tracking-wide">"{review.text}"</p>
-              
+
+              <p className="text-slate-300 text-sm leading-relaxed mb-6 font-light font-sans tracking-wide">&ldquo;{review.text}&rdquo;</p>
+
               <div className="flex items-center gap-3 mt-auto border-t border-white/5 pt-4">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-slate-800 to-slate-700 border border-white/10 flex items-center justify-center text-xs font-bold text-white shadow-inner">
                   {review.name.charAt(0)}

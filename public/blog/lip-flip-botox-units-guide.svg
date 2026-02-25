@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="800" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0f0a1a"/>
+      <stop offset="100%" stop-color="#1a0a20"/>
+    </linearGradient>
+    <linearGradient id="pinkGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#f472b6"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#4ade80"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg1)" rx="16"/>
+  <rect x="1" y="1" width="798" height="498" fill="none" stroke="white" stroke-opacity="0.05" rx="16"/>
+
+  <!-- Title -->
+  <text x="400" y="40" text-anchor="middle" font-family="serif" font-size="22" fill="white" font-weight="bold">How Many Units of Botox for a Lip Flip?</text>
+  <text x="400" y="62" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#94a3b8">Dosage comparison across neurotoxin brands</text>
+
+  <!-- Highlight box -->
+  <rect x="225" y="78" width="350" height="36" rx="18" fill="#ec4899" fill-opacity="0.1" stroke="#ec4899" stroke-opacity="0.2"/>
+  <text x="400" y="101" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#f472b6" font-weight="bold">Most common: 4 - 6 units of Botox</text>
+
+  <!-- Three brand cards -->
+  <!-- Botox Card -->
+  <g transform="translate(60, 135)">
+    <rect width="200" height="180" rx="12" fill="white" fill-opacity="0.03" stroke="#ec4899" stroke-opacity="0.25"/>
+    <rect width="200" height="40" rx="12" fill="url(#pinkGrad)" fill-opacity="0.15"/>
+    <text x="100" y="26" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#f472b6" font-weight="bold">Botox</text>
+    <text x="100" y="72" text-anchor="middle" font-family="serif" font-size="32" fill="white" font-weight="bold">4 - 10</text>
+    <text x="100" y="92" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#94a3b8">units</text>
+    <line x1="30" y1="108" x2="170" y2="108" stroke="white" stroke-opacity="0.05"/>
+    <text x="100" y="128" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#cbd5e1">Allergan</text>
+    <text x="100" y="148" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">OnabotulinumtoxinA</text>
+    <text x="100" y="168" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#f9a8d4">Most popular choice</text>
+  </g>
+
+  <!-- Dysport Card -->
+  <g transform="translate(300, 135)">
+    <rect width="200" height="180" rx="12" fill="white" fill-opacity="0.03" stroke="#3b82f6" stroke-opacity="0.25"/>
+    <rect width="200" height="40" rx="12" fill="url(#blueGrad)" fill-opacity="0.15"/>
+    <text x="100" y="26" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#60a5fa" font-weight="bold">Dysport</text>
+    <text x="100" y="72" text-anchor="middle" font-family="serif" font-size="32" fill="white" font-weight="bold">10 - 25</text>
+    <text x="100" y="92" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#94a3b8">units</text>
+    <line x1="30" y1="108" x2="170" y2="108" stroke="white" stroke-opacity="0.05"/>
+    <text x="100" y="128" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#cbd5e1">Galderma</text>
+    <text x="100" y="148" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">AbobotulinumtoxinA</text>
+    <text x="100" y="168" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#93c5fd">Faster onset (2-3 days)</text>
+  </g>
+
+  <!-- Xeomin Card -->
+  <g transform="translate(540, 135)">
+    <rect width="200" height="180" rx="12" fill="white" fill-opacity="0.03" stroke="#22c55e" stroke-opacity="0.25"/>
+    <rect width="200" height="40" rx="12" fill="url(#greenGrad)" fill-opacity="0.15"/>
+    <text x="100" y="26" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#4ade80" font-weight="bold">Xeomin</text>
+    <text x="100" y="72" text-anchor="middle" font-family="serif" font-size="32" fill="white" font-weight="bold">4 - 10</text>
+    <text x="100" y="92" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#94a3b8">units</text>
+    <line x1="30" y1="108" x2="170" y2="108" stroke="white" stroke-opacity="0.05"/>
+    <text x="100" y="128" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#cbd5e1">Merz</text>
+    <text x="100" y="148" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">IncobotulinumtoxinA</text>
+    <text x="100" y="168" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#86efac">No accessory proteins</text>
+  </g>
+
+  <!-- Conversion note -->
+  <rect x="60" y="338" width="680" height="32" rx="8" fill="white" fill-opacity="0.02" stroke="white" stroke-opacity="0.05"/>
+  <text x="400" y="359" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#94a3b8">Conversion: 1 Botox unit = ~2.5 Dysport units = 1 Xeomin unit</text>
+
+  <!-- Comparison bars -->
+  <text x="60" y="400" font-family="sans-serif" font-size="13" fill="#cbd5e1" font-weight="600">Units Compared to Other Treatments</text>
+
+  <g transform="translate(60, 415)">
+    <!-- Lip Flip -->
+    <text x="0" y="14" font-family="sans-serif" font-size="11" fill="#f9a8d4">Lip Flip</text>
+    <rect x="120" y="2" width="60" height="16" rx="4" fill="url(#pinkGrad)" opacity="0.7"/>
+    <text x="190" y="14" font-family="sans-serif" font-size="10" fill="#94a3b8">4-10 units</text>
+
+    <!-- Crow's Feet -->
+    <text x="0" y="38" font-family="sans-serif" font-size="11" fill="#cbd5e1">Crow's Feet</text>
+    <rect x="120" y="26" width="144" height="16" rx="4" fill="white" fill-opacity="0.08"/>
+    <text x="274" y="38" font-family="sans-serif" font-size="10" fill="#94a3b8">12-24 units</text>
+
+    <!-- Forehead -->
+    <text x="0" y="62" font-family="sans-serif" font-size="11" fill="#cbd5e1">Forehead</text>
+    <rect x="120" y="50" width="180" height="16" rx="4" fill="white" fill-opacity="0.08"/>
+    <text x="310" y="62" font-family="sans-serif" font-size="10" fill="#94a3b8">20-30 units</text>
+
+    <!-- Frown Lines -->
+    <text x="0" y="86" font-family="sans-serif" font-size="11" fill="#cbd5e1">Frown Lines</text>
+    <rect x="120" y="74" width="120" height="16" rx="4" fill="white" fill-opacity="0.08"/>
+    <text x="250" y="86" font-family="sans-serif" font-size="10" fill="#94a3b8">10-20 units</text>
+  </g>
+</svg>
