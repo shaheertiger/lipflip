@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 export const Footer: React.FC = () => {
   return (
@@ -7,18 +8,19 @@ export const Footer: React.FC = () => {
         <div className="text-slate-500 text-sm font-light">
           &copy; {new Date().getFullYear()} LipFlip BeforeAfter. All rights reserved.
         </div>
-        
-        <div className="flex items-center gap-6 text-sm font-medium text-slate-400">
+
+        <div className="flex flex-wrap justify-center md:justify-end items-center gap-6 text-sm font-medium text-slate-400">
+          <Link href="/blog/how-long-does-it-take-for-lip-flip-to-work" className="hover:text-pink-400 transition-colors">Lip Flip Timeline Guide</Link>
           <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
           <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
           <a href="#" className="hover:text-white transition-colors">Medical Disclaimer</a>
         </div>
       </div>
-      
+
       <div className="max-w-3xl mx-auto text-center mt-8 px-6 border-t border-white/5 pt-8">
         <p className="text-xs text-slate-600 leading-relaxed font-light">
-          <span className="font-medium text-slate-500">Disclaimer:</span> This application uses artificial intelligence to simulate aesthetic procedures. 
-          Results are for visualization purposes only and may not reflect actual medical results. 
+          <span className="font-medium text-slate-500">Disclaimer:</span> This application uses artificial intelligence to simulate aesthetic procedures.
+          Results are for visualization purposes only and may not reflect actual medical results.
           Individual anatomy varies. Always consult with a licensed medical professional for medical advice.
         </p>
       </div>

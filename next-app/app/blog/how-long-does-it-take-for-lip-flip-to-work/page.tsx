@@ -1,0 +1,456 @@
+'use client';
+
+import React from 'react';
+import Link from 'next/link';
+import { ArrowLeft, Clock, Sparkles, AlertCircle, Info, CheckCircle2, DollarSign, Zap, Share2, ShieldCheck, ChevronRight, HelpCircle, User, Calendar, BookOpen } from 'lucide-react';
+import { Logo } from '@/components/Logo';
+import { Footer } from '@/components/Footer';
+
+export default function LipFlipTimeline() {
+    return (
+        <div className="relative min-h-screen text-slate-200 font-sans flex flex-col overflow-x-hidden pt-20">
+            {/* Background Effects */}
+            <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-pink-600/10 rounded-full blur-[128px] animate-pulse" />
+                <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[128px] animate-pulse delay-1000" />
+            </div>
+
+            {/* Navbar */}
+            <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-black/50 backdrop-blur-xl transition-all duration-300">
+                <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between">
+                    <Link href="/" className="scale-90 md:scale-100 origin-left">
+                        <Logo />
+                    </Link>
+                    <div className="flex items-center gap-6">
+                        <Link href="/" className="px-5 py-2 overflow-hidden relative group bg-white/5 rounded-full transition-all border border-white/10">
+                            <span className="relative z-10 text-sm font-medium text-slate-300 group-hover:text-white transition-colors">Back to Visualizer</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 to-purple-500/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                        </Link>
+                    </div>
+                </div>
+            </nav>
+
+            <main className="relative z-10 max-w-4xl mx-auto px-6 pt-12 pb-20 w-full">
+                {/* Breadcrumbs */}
+                <div className="mb-8 flex items-center gap-2 text-sm text-slate-500 font-medium">
+                    <Link href="/" className="hover:text-pink-400 transition-colors">Home</Link>
+                    <ChevronRight size={14} />
+                    <span className="text-slate-300 font-semibold tracking-wide">Guides</span>
+                </div>
+
+                {/* Header Section */}
+                <header className="mb-16 animate-fade-in text-center md:text-left">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-pink-500/20 bg-pink-500/10 text-[10px] font-bold tracking-wider uppercase text-pink-300 mb-6 font-mono shadow-[0_0_15px_rgba(236,72,153,0.1)]">
+                        <Clock size={12} className="text-pink-400" />
+                        Published February 2026 • 12 Min Read
+                    </div>
+                    <h1 className="text-4xl md:text-7xl font-serif text-white tracking-tight leading-[1.1] mb-8">
+                        The Ultimate Guide: How Long Does It Take for <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-rose-400 to-pink-500">
+                            Lip Flip to Work?
+                        </span>
+                    </h1>
+
+                    <div className="flex flex-wrap items-center gap-6 text-slate-400 text-sm mb-10 justify-center md:justify-start">
+                        <div className="flex items-center gap-2">
+                            <User size={16} className="text-pink-500" />
+                            <span>By Aesthetic Science Team</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <ShieldCheck size={16} className="text-emerald-500" />
+                            <span>Medically Reviewed</span>
+                        </div>
+                    </div>
+
+                    <p className="text-xl md:text-2xl text-slate-300 font-light leading-relaxed italic border-l-4 border-pink-600/40 pl-8 md:pl-10 max-w-3xl">
+                        "While fillers provide volume, the lip flip provides character. Understanding the timeline of muscle relaxation is essential for managing your expectations and achieving the perfect pout."
+                    </p>
+                </header>
+
+                {/* Action Bar / ToC */}
+                <div className="bg-slate-900/40 backdrop-blur-md border border-white/5 rounded-3xl p-6 md:p-8 mb-16 shadow-2xl">
+                    <h3 className="text-white font-serif text-xl mb-4 flex items-center gap-2">
+                        <BookOpen size={20} className="text-pink-500" />
+                        What You'll Learn
+                    </h3>
+                    <div className="grid sm:grid-cols-2 gap-4 text-sm text-slate-400 font-light">
+                        <a href="#scientific-breakdown" className="hover:text-pink-400 transition-colors flex items-center gap-2">• The Day-by-Day Timeline</a>
+                        <a href="#units-demystified" className="hover:text-pink-400 transition-colors flex items-center gap-2">• Botox vs Dysport Units</a>
+                        <a href="#process-vs-fillers" className="hover:text-pink-400 transition-colors flex items-center gap-2">• Flip vs. Filler Comparison</a>
+                        <a href="#aftercare-rules" className="hover:text-pink-400 transition-colors flex items-center gap-2">• The Golden Rules of Aftercare</a>
+                        <a href="#cost-guide" className="hover:text-pink-400 transition-colors flex items-center gap-2">• National Cost Averages</a>
+                        <a href="#is-it-permanent" className="hover:text-pink-400 transition-colors flex items-center gap-2">• Longevity & Reversibility</a>
+                    </div>
+                </div>
+
+                {/* Content Body */}
+                <div className="prose prose-invert max-w-none space-y-16">
+
+                    {/* Section 1: Intro */}
+                    <section id="basics" className="space-y-6">
+                        <h2 className="text-3xl font-serif text-white">The Rise of the "Subtle" Lip</h2>
+                        <p className="text-slate-300 text-lg leading-relaxed">
+                            If you've been browsing aesthetic trends lately, you've undoubtedly encountered the term <strong>"Lip Flip."</strong> Unlike the pillowy, voluminous results associated with traditional dermal fillers, the lip flip is celebrated for its extreme subtlety. It is the procedure of choice for those who want their lips to look "better," but not necessarily "bigger."
+                        </p>
+                        <p className="text-pink-200/80 text-lg leading-relaxed bg-pink-500/5 p-4 rounded-xl border border-pink-500/10">
+                            But here is the most common question patients ask in the injector's chair: <strong>"How long for a lip flip to work?"</strong> If you have a date, a wedding, or a photoshoot, understanding the "flipping" window is critical.
+                        </p>
+                    </section>
+
+                    {/* Section 2: What is it? */}
+                    <section className="space-y-6">
+                        <h2 className="text-3xl font-serif text-white flex items-center gap-3">
+                            <ShieldCheck className="text-pink-500" size={28} />
+                            What Exactly Does a Lip Flip Do?
+                        </h2>
+                        <p className="text-slate-300 text-lg leading-relaxed">
+                            Before we dive into the timing, we must understand the mechanics. Many people confuse this with filler, but <strong>what is a lip flip vs fillers?</strong> The difference lies in the substance.
+                        </p>
+                        <p className="text-slate-300 text-lg leading-relaxed">
+                            A <strong>Botox Lip Flip</strong> involves the precise injection of a neurotoxin—usually <strong>Botox Cosmetic</strong>, <strong>Dysport</strong>, or <strong>Xeomin</strong>—into the orbicularis oris muscle. This is the circular muscle that surrounds your mouth and allows you to pucker, whistle, and speak.
+                        </p>
+                        <div className="grid md:grid-cols-2 gap-8 py-4">
+                            <div className="bg-white/5 p-6 rounded-2xl border border-white/10 hover:border-pink-500/20 transition-all">
+                                <h4 className="text-white font-bold mb-3 flex items-center gap-2">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-pink-500" />
+                                    The "Flip" Effect
+                                </h4>
+                                <p className="text-sm text-slate-400 leading-relaxed font-light">
+                                    By injecting small amounts of toxin into the upper border of this muscle, the injector causes the muscle to relax. This relaxation allows the upper lip to "roll" or "flip" slightly upward and outward. It doesn't add volume; it reveals more of the pink part (the vermilion border) that was already there.
+                                </p>
+                            </div>
+                            <div className="bg-white/5 p-6 rounded-2xl border border-white/10 hover:border-pink-500/20 transition-all">
+                                <h4 className="text-white font-bold mb-3 flex items-center gap-2">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-pink-500" />
+                                    Gummy Smile Correction
+                                </h4>
+                                <p className="text-sm text-slate-400 leading-relaxed font-light">
+                                    One of the biggest benefits of a lip flip is for those with a "gummy smile." When you smile, the relaxed muscle prevents the upper lip from thinning out or curling under too much, hiding the gums and creating a more balanced aesthetic.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Section 3: The Scientific Breakdown */}
+                    <section id="scientific-breakdown" className="space-y-10">
+                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                            <h2 className="text-3xl font-serif text-white">How Long to See Lip Flip Results: The Timeline</h2>
+                            <div className="flex items-center gap-2 px-4 py-2 bg-pink-600/20 text-pink-400 rounded-full text-xs font-bold uppercase tracking-widest border border-pink-500/20 shadow-[0_0_20px_rgba(236,72,153,0.2)]">
+                                <Zap size={14} />
+                                Science-Backed Data
+                            </div>
+                        </div>
+
+                        <p className="text-slate-300 text-lg leading-relaxed">
+                            Because neurotoxins take time to block the neurotransmitters (acetylcholine) that signal muscle movement, results are <strong>never instant</strong>. Here is exactly <strong>how long a lip flip takes to show</strong>, broken down day by day:
+                        </p>
+
+                        <div className="space-y-4 relative">
+                            {/* Vertical line for the timeline */}
+                            <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-pink-500/50 via-purple-500/50 to-transparent hidden md:block" />
+
+                            {[
+                                {
+                                    day: "Hour 1 - 24",
+                                    title: "Injection & Recovery",
+                                    desc: "You will feel exactly the same. You might have tiny red marks at the injection points. Some patients experience very minor swelling, but most people can return to work immediately. This is NOT the result phase."
+                                },
+                                {
+                                    day: "Day 2 - 3",
+                                    title: "Molecular Binding",
+                                    desc: "The neurotoxin is currently busy binding to the nerve endings. You may feel a slight 'heaviness' in your upper lip. If you're asking 'does lip flip work?' and looking in the mirror today, be patient. The muscle is only just beginning to weaken."
+                                },
+                                {
+                                    day: "Day 4 - 7",
+                                    title: "The Initial Flip",
+                                    desc: "This is when most people start to see the change. <strong>How long for a lip flip to kick in?</strong> Usually right here. You'll notice your smile looks a bit different in photos, and the upper lip doesn't disappear when you laugh. It's the 'aha!' moment."
+                                },
+                                {
+                                    day: "Day 10 - 14",
+                                    title: "Peak & Final Result",
+                                    desc: "<strong>How long does it take for a lip flip to show in full?</strong> Fourteen days. At this two-week mark, the muscle relaxation is total. This is the time to assess your final look and see if you need any 'touch-ups' (though touch-ups are rare for this procedure)."
+                                }
+                            ].map((step, i) => (
+                                <div key={i} className="relative md:pl-20 animate-fade-in transition-all group">
+                                    <div className="hidden md:flex absolute left-0 top-1 w-12 h-12 rounded-2xl bg-slate-900 border border-white/10 items-center justify-center text-pink-500 font-bold shadow-xl group-hover:border-pink-500/50 transition-colors">
+                                        {i + 1}
+                                    </div>
+                                    <div className="p-6 md:p-8 bg-white/5 rounded-3xl border border-white/5 hover:bg-white/[0.08] transition-all">
+                                        <span className="text-pink-400 font-mono text-sm tracking-widest uppercase mb-2 block">{step.day}</span>
+                                        <h4 className="text-2xl font-serif text-white mb-3 tracking-tight">{step.title}</h4>
+                                        <p className="text-slate-400 font-light leading-relaxed">
+                                            {step.desc}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Banner CTA Section */}
+                    <section className="relative overflow-hidden group">
+                        <div className="absolute inset-0 bg-gradient-to-r from-pink-600/30 via-rose-600/30 to-purple-600/30 blur-3xl opacity-50 transition-opacity group-hover:opacity-75" />
+                        <div className="relative z-10 bg-black/60 backdrop-blur-3xl border border-pink-500/20 rounded-[3rem] p-10 md:p-16 text-center space-y-8 shadow-[0_0_100px_-20px_rgba(219,39,119,0.3)]">
+                            <div className="inline-flex p-5 rounded-full bg-pink-500/10 border border-pink-500/20 mb-4 animate-bounce">
+                                <Sparkles className="text-pink-400" size={40} />
+                            </div>
+                            <h2 className="text-4xl md:text-5xl font-serif text-white tracking-tight">
+                                Stop Guessing. <br />
+                                <span className="text-pink-400">See your results now.</span>
+                            </h2>
+                            <p className="text-slate-300 text-lg max-w-xl mx-auto font-light">
+                                Wondering if a lip flip will actually suit your face? Our AI engine simulates the exact movement of your vermilion border instantly.
+                            </p>
+                            <div className="pt-4">
+                                <Link href="/" className="inline-flex flex-col sm:flex-row items-center gap-4">
+                                    <button className="px-10 py-5 bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white font-bold text-xl rounded-full shadow-[0_20px_50px_-15px_rgba(236,72,153,0.5)] hover:scale-105 active:scale-95 transition-all flex items-center gap-3">
+                                        Try the Lip Flip Visualizer
+                                        <ArrowRight size={22} />
+                                    </button>
+                                    <span className="text-slate-500 text-sm font-medium">Free for first-time users</span>
+                                </Link>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Section 4: Units Breakdown */}
+                    <section id="units-demystified" className="space-y-10">
+                        <h2 className="text-3xl font-serif text-white">Units Demystified: Botox vs. Dysport</h2>
+                        <p className="text-slate-300 text-lg leading-relaxed">
+                            One of the most confusing parts of getting a lip flip is the unit count. <strong>How many units in a lip flip?</strong> It depends entirely on the brand of neurotoxin your injector uses.
+                        </p>
+
+                        <div className="grid md:grid-cols-2 gap-8 text-center">
+                            <div className="p-8 bg-slate-900 border border-white/5 rounded-3xl shadow-xl transition-transform hover:-translate-y-2">
+                                <h4 className="text-2xl font-serif text-white mb-6">Botox Cosmetic</h4>
+                                <div className="text-5xl font-bold text-pink-500 mb-6 font-mono">2 - 4 <span className="text-sm text-slate-500 uppercase">units</span></div>
+                                <p className="text-slate-400 text-sm font-light leading-relaxed">
+                                    Botox is highly concentrated. Most injectors use 2-4 units total, placed in 4 injection points along the vermilion border.
+                                </p>
+                            </div>
+                            <div className="p-8 bg-slate-900 border border-white/5 rounded-3xl shadow-xl transition-transform hover:-translate-y-2">
+                                <h4 className="text-2xl font-serif text-white mb-6">Dysport</h4>
+                                <div className="text-5xl font-bold text-pink-500 mb-6 font-mono">5 - 10 <span className="text-sm text-slate-500 uppercase">units</span></div>
+                                <p className="text-slate-400 text-sm font-light leading-relaxed">
+                                    <strong>How many units of dysport for lip flip?</strong> Dysport units are measured differently (it's less concentrated). You need about 2.5x to 3x more units to get the same results as Botox.
+                                </p>
+                            </div>
+                        </div>
+
+                        <p className="text-slate-500 text-sm italic py-4 text-center border-t border-white/5">
+                            Note: <strong>How many botox units for lip flip</strong> can vary based on your muscle strength. Men or people with very strong lip muscles may require 5-6 units.
+                        </p>
+                    </section>
+
+                    {/* Section 5: Aftercare (The Big Expansion) */}
+                    <section id="aftercare-rules" className="space-y-10">
+                        <h2 className="text-3xl font-serif text-white flex items-center gap-3">
+                            <AlertCircle size={28} className="text-rose-500" />
+                            What NOT To Do After a Lip Flip
+                        </h2>
+                        <p className="text-slate-300 text-lg leading-relaxed">
+                            You've spent the time and money—don't ruin your results in the first 24 hours. Neurotoxin migration is a real risk if you don't follow the "Golden Rules." If the toxin moves to the wrong part of the muscle, it can affect your speech or even make your smile look crooked.
+                        </p>
+
+                        <div className="grid sm:grid-cols-2 gap-6 pb-6">
+                            <div className="p-6 bg-white/5 rounded-2xl border-l-4 border-l-rose-500 flex flex-col gap-3">
+                                <h5 className="text-white font-bold flex items-center gap-2">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                                    Can I eat after a lip flip?
+                                </h5>
+                                <p className="text-slate-400 text-sm leading-relaxed font-light">
+                                    Yes, but avoid foods that require intense chewing or messy eating for at least 6 hours. Try not to wipe your mouth aggressively. <strong>Can you eat after lip flip?</strong> Absolutely, just be gentle.
+                                </p>
+                            </div>
+                            <div className="p-6 bg-white/5 rounded-2xl border-l-4 border-l-rose-500 flex flex-col gap-3">
+                                <h5 className="text-white font-bold flex items-center gap-2">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                                    Can you kiss after lip flip?
+                                </h5>
+                                <p className="text-slate-400 text-sm leading-relaxed font-light">
+                                    Skip the heavy puckering or passionate kissing for the first 24-48 hours. Any intense pressure on the injection site can cause the product to migrate prematurely.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="bg-slate-900 border border-white/5 rounded-[2rem] p-8 md:p-12 space-y-8">
+                            <h4 className="text-2xl font-serif text-white text-center">The 24-Hour Checklist</h4>
+                            <ul className="grid md:grid-cols-2 gap-6">
+                                {[
+                                    "No Straws: The suction can cause migration.",
+                                    "No Rubbing: Don't touch the injection sites.",
+                                    "Stay Upright: Don't lie down for 4 hours.",
+                                    "No Alcohol: Alcohol thins the blood and increases bruising.",
+                                    "Skip the Gym: Intense blood flow can flush the toxin.",
+                                    "No Hot Tubs/Saunas: Heat can cause inflammation."
+                                ].map((rule, idx) => (
+                                    <li key={idx} className="flex items-start gap-4 group">
+                                        <div className="w-6 h-6 rounded-full bg-rose-500/20 flex-shrink-0 flex items-center justify-center text-rose-500 transition-colors group-hover:bg-rose-500 group-hover:text-white mt-1">
+                                            <CheckCircle2 size={12} />
+                                        </div>
+                                        <span className="text-slate-300 font-light leading-relaxed">{rule}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </section>
+
+                    {/* Section 6: Comparison Table */}
+                    <section id="process-vs-fillers" className="space-y-10">
+                        <h2 className="text-3xl font-serif text-white">Lip Flip vs. Lip Filler: A Deep Dive</h2>
+                        <p className="text-slate-300 text-lg leading-relaxed">
+                            Still confused about <strong>what's the difference between a lip flip and lip filler?</strong> Think of it this way: <strong>Filler is for size; Flip is for shape.</strong>
+                        </p>
+
+                        <div className="overflow-x-auto rounded-3xl border border-white/10 shadow-2xl">
+                            <table className="w-full text-left">
+                                <thead className="bg-slate-950/50 text-slate-100 font-medium border-b border-white/10">
+                                    <tr>
+                                        <th className="px-8 py-6 text-sm uppercase tracking-widest font-mono">Category</th>
+                                        <th className="px-8 py-6 text-sm uppercase tracking-widest font-mono text-pink-400">The Lip Flip</th>
+                                        <th className="px-8 py-6 text-sm uppercase tracking-widest font-mono">Lip Filler (Juvederm/Restylane)</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-white/5 text-slate-400 bg-white/[0.02]">
+                                    <tr>
+                                        <td className="px-8 py-6 font-bold text-slate-200">Main Goal</td>
+                                        <td className="px-8 py-6">Reveal hidden surface area</td>
+                                        <td className="px-8 py-6">Add volume and hydrate</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="px-8 py-6 font-bold text-slate-200">How long to work?</td>
+                                        <td className="px-8 py-6 font-bold text-pink-400">3 - 14 Days</td>
+                                        <td className="px-8 py-6">Instant (with swelling)</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="px-8 py-6 font-bold text-slate-200">Average Cost</td>
+                                        <td className="px-8 py-6">$80 - $200</td>
+                                        <td className="px-8 py-6">$500 - $1,200</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="px-8 py-6 font-bold text-slate-200">Longevity</td>
+                                        <td className="px-8 py-6">3 - 4 Months</td>
+                                        <td className="px-8 py-6">6 - 12 Months</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="px-8 py-6 font-bold text-slate-200">Pain Level</td>
+                                        <td className="px-8 py-6">1/10 (Quick pinches)</td>
+                                        <td className="px-8 py-6">4/10 (Requires numbing)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    {/* Section 7: Cost */}
+                    <section id="cost-guide" className="space-y-6">
+                        <h2 className="text-3xl font-serif text-white flex items-center gap-3">
+                            <DollarSign size={28} className="text-pink-500" />
+                            How Much is a Lip Flip?
+                        </h2>
+                        <p className="text-slate-300 text-lg leading-relaxed">
+                            One of the biggest selling points of the lip flip is the price. <strong>How much does lip flip cost</strong> compared to other treatments? In 2026, the national average remains remarkably affordable.
+                        </p>
+                        <div className="p-8 bg-gradient-to-br from-slate-900 to-black border border-white/5 rounded-3xl shadow-2xl space-y-4">
+                            <p className="text-slate-300 leading-relaxed font-light">
+                                Most clinics charge either by the unit or a flat "procedure fee."
+                            </p>
+                            <ul className="space-y-4 text-slate-400 font-light list-disc pl-6">
+                                <li><strong>Small Boutique Clinics:</strong> $80 - $150</li>
+                                <li><strong>High-End Plastic Surgery Centers:</strong> $200 - $350</li>
+                                <li><strong>Per Unit Pricing:</strong> $12 - $20 per unit of Botox.</li>
+                            </ul>
+                            <p className="text-pink-400 text-sm font-medium pt-4 bg-pink-500/5 p-4 rounded-xl">
+                                Expert Insight: If a clinic is charging $20 for a lip flip, beware. They may be over-diluting the product. A safe, high-quality treatment should reflect the skill and the product cost.
+                            </p>
+                        </div>
+                    </section>
+
+                    {/* Section 8: Permanence */}
+                    <section id="is-it-permanent" className="space-y-10">
+                        <h2 className="text-3xl font-serif text-white">Is Lip Flip Permanent?</h2>
+                        <p className="text-slate-300 text-lg leading-relaxed">
+                            For anyone nervous about commitment: <strong>Is a lip flip permanent? No.</strong>
+                        </p>
+                        <p className="text-slate-300 text-lg leading-relaxed">
+                            Neurotoxins are naturally metabolized by your body over time. In the case of the lips, because we use them constantly (talking, eating, smiling), the toxin tends to wear off faster than it does in the forehead or 'crow's feet.'
+                        </p>
+                        <div className="bg-slate-900 p-8 rounded-3xl border border-white/5 flex flex-col items-center text-center gap-4">
+                            <Calendar className="text-pink-500 mb-2" size={32} />
+                            <h4 className="text-xl font-bold text-white">How often to get lip flip?</h4>
+                            <p className="text-slate-400 font-light max-w-lg">
+                                To maintain the result, you should plan to visit your injector every <strong>10 to 12 weeks</strong>. If you wait longer, the muscle will fully regain its strength and the "flip" will disappear.
+                            </p>
+                        </div>
+
+                        <h3 className="text-2xl font-serif text-white pt-6">Can you reverse a lip flip?</h3>
+                        <p className="text-slate-300 text-lg leading-relaxed">
+                            Unlike fillers, which can be dissolved with an enzyme called hyaluronidase, <strong>neurotoxins cannot be reversed</strong>. Once it's injected, you have to wait for it to wear off. However, because the dose is so small (2-4 units), if you dislike the result, it will significantly fade within 4-6 weeks anyway.
+                        </p>
+                    </section>
+
+                    {/* Section 9: FAQ (SEO Rich) */}
+                    <section className="space-y-10 pb-12 border-b border-white/5">
+                        <h2 className="text-3xl font-serif text-white flex items-center gap-3">
+                            <HelpCircle size={28} className="text-pink-500" />
+                            Common Lip Flip Questions
+                        </h2>
+
+                        <div className="space-y-6">
+                            <div className="p-6 bg-white/[0.02] rounded-3xl border border-white/5 space-y-3">
+                                <h5 className="text-white font-bold text-lg">Should I get a lip flip?</h5>
+                                <p className="text-slate-400 text-sm font-light leading-relaxed">
+                                    You are a great candidate if your upper lip "disappears" when you smile, or if you want a subtle improvement without the "fake" look of fillers. It's also great for those looking for an affordable introduction to aesthetics.
+                                </p>
+                            </div>
+
+                            <div className="p-6 bg-white/[0.02] rounded-3xl border border-white/5 space-y-3">
+                                <h5 className="text-white font-bold text-lg">What is Botox lip flip vs Dysport?</h5>
+                                <p className="text-slate-400 text-sm font-light leading-relaxed">
+                                    Dysport tends to "spread" slightly more and sometimes kicks in a day or two faster (day 2-3). Botox is more localized. Both provide identical aesthetic results in the hands of a skilled injector.
+                                </p>
+                            </div>
+
+                            <div className="p-6 bg-white/[0.02] rounded-3xl border border-white/5 space-y-3">
+                                <h5 className="text-white font-bold text-lg">Where to get a lip flip near me?</h5>
+                                <p className="text-slate-400 text-sm font-light leading-relaxed">
+                                    Always choose a board-certified dermatologist, plastic surgeon, or a registered nurse injector with specialized training in facial anatomy. Don't go to a "beauty bar" that lacks medical supervision.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Final Conclusion */}
+                    <section className="space-y-8 animate-fade-in-up">
+                        <h2 className="text-4xl font-serif text-white">Conclusion: The 14-Day Rule</h2>
+                        <p className="text-slate-300 text-lg leading-relaxed">
+                            Managing expectations is the key to happiness in cosmetic treatments. If you are asking <strong>how long does it take for a lip flip to work</strong>, remember the 14-day rule. Do not judge your results on day 3. Do not panic on day 5. Wait for the full two-week window for the magic to happen.
+                        </p>
+                        <p className="text-slate-400 text-lg leading-relaxed font-light">
+                            The lip flip is the ultimate "everyone will notice, but no one will know" treatment. It enhances your natural beauty by allowing your own anatomy to shine a little brighter.
+                        </p>
+
+                        <div className="flex flex-col items-center gap-8 py-12 border-t border-white/5 mt-16">
+                            <div className="text-center space-y-2">
+                                <h4 className="text-2xl font-serif text-white">Ready for your transformation?</h4>
+                                <p className="text-slate-500 font-light">Join 15,000+ others who visualized before they injected.</p>
+                            </div>
+                            <div className="flex flex-wrap justify-center gap-4">
+                                <Link href="/" className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white rounded-full font-bold transition-all border border-white/10 flex items-center gap-2">
+                                    <ArrowLeft size={18} />
+                                    Try Visualizer
+                                </Link>
+                                <button className="px-8 py-4 bg-pink-600 hover:bg-pink-500 text-white rounded-full font-bold transition-all shadow-xl shadow-pink-500/20 flex items-center gap-2">
+                                    <Share2 size={18} />
+                                    Share This Guide
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+
+            <Footer />
+        </div>
+    );
+}

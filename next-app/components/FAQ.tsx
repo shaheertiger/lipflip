@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Plus, Minus, HelpCircle } from 'lucide-react';
+import Link from 'next/link';
+import { Plus, Minus, HelpCircle, ArrowRight } from 'lucide-react';
 
 const faqs = [
   {
@@ -17,6 +18,14 @@ const faqs = [
   {
     question: "Will this work on my specific lip shape?",
     answer: "The AI adapts to your unique anatomy, preserving your cupid's bow and natural asymmetry. For the best results, use a photo with good lighting where your lips are relaxed (not smiling excessively or puckered)."
+  },
+  {
+    question: "How long until I see real results?",
+    answer: "Initial results typically show in 3-5 days, with full results appearing at the 14-day mark.",
+    link: {
+      text: "Read our full Lip Flip Results Timeline guide",
+      url: "/blog/how-long-does-it-take-for-lip-flip-to-work"
+    }
   }
 ];
 
@@ -27,7 +36,7 @@ export const FAQ: React.FC = () => {
     <div className="max-w-3xl mx-auto py-16 px-6">
       <div className="text-center mb-12 space-y-4">
         <div className="inline-flex items-center justify-center p-3 bg-white/5 rounded-full mb-4 ring-1 ring-white/10">
-            <HelpCircle size={24} className="text-pink-400" />
+          <HelpCircle size={24} className="text-pink-400" />
         </div>
         <h2 className="text-3xl md:text-4xl font-serif text-white">Common Questions</h2>
         <p className="text-slate-400 font-light">Everything you need to know before you upload.</p>
@@ -35,14 +44,14 @@ export const FAQ: React.FC = () => {
 
       <div className="space-y-4">
         {faqs.map((faq, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className={`
                 border rounded-2xl transition-all duration-300 overflow-hidden
-                ${openIndex === index 
-                    ? 'bg-white/[0.03] border-pink-500/30 shadow-[0_0_30px_rgba(236,72,153,0.1)]' 
-                    : 'bg-transparent border-white/5 hover:bg-white/[0.02]'
-                }
+                ${openIndex === index
+                ? 'bg-white/[0.03] border-pink-500/30 shadow-[0_0_30px_rgba(236,72,153,0.1)]'
+                : 'bg-transparent border-white/5 hover:bg-white/[0.02]'
+              }
             `}
           >
             <button
@@ -56,13 +65,24 @@ export const FAQ: React.FC = () => {
                 {openIndex === index ? <Minus size={16} /> : <Plus size={16} />}
               </span>
             </button>
-            
-            <div 
-                className={`transition-all duration-300 ease-in-out ${openIndex === index ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}
+
+            <div
+              className={`transition-all duration-300 ease-in-out ${openIndex === index ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'}`}
             >
-              <p className="px-6 pb-6 text-slate-400 font-light leading-relaxed">
-                {faq.answer}
-              </p>
+              <div className="px-6 pb-6 space-y-4">
+                <p className="text-slate-400 font-light leading-relaxed">
+                  {faq.answer}
+                </p>
+                {faq.link && (
+                  <Link
+                    href={faq.link.url}
+                    className="inline-flex items-center gap-2 text-pink-400 hover:text-pink-300 text-sm font-medium group transition-colors"
+                  >
+                    {faq.link.text}
+                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         ))}
