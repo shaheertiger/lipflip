@@ -1,9 +1,0 @@
-{
-  "/_global-error/page": "app/_global-error/page.js",
-  "/_not-found/page": "app/_not-found/page.js",
-  "/blog/how-long-does-it-take-for-lip-flip-to-work/page": "app/blog/how-long-does-it-take-for-lip-flip-to-work/page.js",
-  "/blog/lip-flip-aftercare-guide-what-not-to-do/page": "app/blog/lip-flip-aftercare-guide-what-not-to-do/page.js",
-  "/blog/lip-flip-vs-filler/page": "app/blog/lip-flip-vs-filler/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/page": "app/page.js"
-}
